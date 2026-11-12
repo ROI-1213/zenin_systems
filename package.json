@@ -5,7 +5,8 @@
   "packageManager": "pnpm@10.6.5",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/prepare-prisma.mjs && prisma generate && next build",
+    "postinstall": "node scripts/prepare-prisma.mjs && prisma generate",
     "start": "next start",
     "lint": "tsc --noEmit",
     "typecheck": "tsc --noEmit",

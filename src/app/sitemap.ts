@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import prisma from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.zeninsystems.com";
 
@@ -20,21 +22,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/terms-and-conditions",
   ];
 
-  const [publishedProducts, publishedAISolutions, publishedServices] =
-    await Promise.all([
-      prisma.product.findMany({
-        where: { status: "PUBLISHED" },
-        select: { slug: true, updatedAt: true },
-      }),
-      prisma.aISolution.findMany({
-        where: { status: "PUBLISHED" },
-        select: { slug: true, updatedAt: true },
-      }),
-      prisma.service.findMany({
-        where: { status: "PUBLISHED" },
-        select: { slug: true, updatedAt: true },
-      }),
-    ]);
+  let publishedProducts: { slug: string; updatedAt: Date }[] = [];
+  let publishedAISolutions: { slug: string; updatedAt: Date }[] = [];
+  let publishedServices: { slug: string; updatedAt: Date }[] = [];
+
+  try {
+    [publishedProducts, publishedAISolutions, publishedServices] =
+      await Promise.all([
+        prisma.product.findMany({
+          where: { status: "PUBLISHED" },
+          select: { slug: true, updatedAt: true },
+        }),
+        prisma.aISolution.findMany({
+          where: { status: "PUBLISHED" },
+          select: { slug: true, updatedAt: true },
+        }),
+        prisma.service.findMany({
+          where: { status: "PUBLISHED" },
+          select: { slug: true, updatedAt: true },
+        }),
+      ]);
+  } catch {
+    // Gracefully fall back to static routes if DB is not yet provisioned/seeded
+  }
 
   return [
     ...staticRoutes.map((route) => ({
