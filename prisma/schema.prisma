@@ -1,0 +1,407 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  name         String
+  passwordHash String
+  role         String       @default("EDITOR") // SUPER_ADMIN | EDITOR
+  isActive     Boolean      @default(true)
+  lastLoginAt  DateTime?
+  sessions     Session[]
+  accounts     Account[]
+  enquiryNotes EnquiryNote[]
+  mediaAssets  MediaAsset[]
+  auditLogs    AuditLog[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@index([email])
+  @@index([role])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model ProductCategory {
+  id               String               @id @default(cuid())
+  name             String
+  slug             String               @unique
+  shortDescription String
+  description      String
+  icon             String               @default("Shield")
+  coverImage       String?
+  isCoreSolution   Boolean              @default(false)
+  dedicatedRoute   String?
+  status           String               @default("PUBLISHED") // DRAFT | PUBLISHED | ARCHIVED
+  isFeatured       Boolean              @default(false)
+  sortOrder        Int                  @default(0)
+  seoTitle         String?
+  seoDescription   String?
+  subcategories    ProductSubcategory[]
+  products         Product[]
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+
+  @@index([slug])
+  @@index([isCoreSolution, status, sortOrder])
+}
+
+model ProductSubcategory {
+  id               String          @id @default(cuid())
+  name             String
+  slug             String          @unique
+  shortDescription String?
+  categoryId       String
+  category         ProductCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  status           String          @default("PUBLISHED")
+  sortOrder        Int             @default(0)
+  products         Product[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@index([categoryId, sortOrder])
+}
+
+model Product {
+  id                      String              @id @default(cuid())
+  name                    String
+  slug                    String              @unique
+  shortDescription        String
+  description             String
+  categoryId              String
+  category                ProductCategory     @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  subcategoryId           String?
+  subcategory             ProductSubcategory? @relation(fields: [subcategoryId], references: [id], onDelete: SetNull)
+  features                String              @default("[]") // JSON array of strings
+  applications            String              @default("[]") // JSON array of strings
+  technicalSpecifications String              @default("[]") // JSON array of { label, value }
+  integrationCapabilities String              @default("[]") // JSON array of strings
+  relatedProductSlugs     String              @default("[]") // JSON array of slugs
+  featuredImage           String?
+  images                  ProductImage[]
+  enquiries               Enquiry[]
+  status                  String              @default("PUBLISHED") // DRAFT | PUBLISHED | ARCHIVED
+  isFeatured              Boolean             @default(false)
+  requiresReview          Boolean             @default(true)
+  sortOrder               Int                 @default(0)
+  seoTitle                String?
+  seoDescription          String?
+  createdAt               DateTime            @default(now())
+  updatedAt               DateTime            @updatedAt
+
+  @@index([categoryId, status, sortOrder])
+  @@index([isFeatured, status])
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  url       String
+  altText   String
+  caption   String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([productId, sortOrder])
+}
+
+model AISolutionCategory {
+  id               String       @id @default(cuid())
+  code             String       @unique // e.g. CATEGORY_A, CATEGORY_B
+  name             String
+  slug             String       @unique
+  shortDescription String
+  description      String
+  icon             String       @default("Cpu")
+  sortOrder        Int          @default(0)
+  status           String       @default("PUBLISHED")
+  seoTitle         String?
+  seoDescription   String?
+  solutions        AISolution[]
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  @@index([sortOrder, status])
+}
+
+model AISolution {
+  id                   String             @id @default(cuid())
+  name                 String
+  slug                 String             @unique
+  categoryId           String
+  category             AISolutionCategory @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  shortDescription     String
+  overview             String
+  problemStatement     String
+  howItWorks           String
+  capabilities         String             @default("[]") // JSON array of strings
+  applicableIndustries String             @default("[]") // JSON array of strings
+  benefits             String             @default("[]") // JSON array of strings
+  integrationInfo      String?
+  featuredImage        String?
+  gallery              String             @default("[]") // JSON array of { url, altText, caption }
+  relatedSolutionSlugs String             @default("[]") // JSON array of slugs
+  requiresReview       Boolean            @default(false)
+  reviewNote           String?
+  status               String             @default("PUBLISHED") // DRAFT | PUBLISHED | ARCHIVED
+  isFeatured           Boolean            @default(false)
+  sortOrder            Int                @default(0)
+  seoTitle             String?
+  seoDescription       String?
+  enquiries            Enquiry[]
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  @@index([categoryId, status, sortOrder])
+  @@index([isFeatured, status])
+}
+
+model Service {
+  id                  String         @id @default(cuid())
+  name                String
+  slug                String         @unique
+  shortDescription    String
+  longDescription     String
+  icon                String         @default("Wrench")
+  coverImage          String?
+  features            String         @default("[]") // JSON array of strings
+  capabilities        String         @default("[]") // JSON array of strings
+  applications        String         @default("[]") // JSON array of strings
+  industries          String         @default("[]") // JSON array of strings
+  relatedServiceSlugs String         @default("[]") // JSON array of slugs
+  images              ServiceImage[]
+  enquiries           Enquiry[]
+  isFeatured          Boolean        @default(false)
+  status              String         @default("PUBLISHED") // DRAFT | PUBLISHED | ARCHIVED
+  sortOrder           Int            @default(0)
+  seoTitle            String?
+  seoDescription      String?
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+
+  @@index([status, isFeatured, sortOrder])
+}
+
+model ServiceImage {
+  id        String   @id @default(cuid())
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  url       String
+  altText   String
+  caption   String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([serviceId, sortOrder])
+}
+
+model Enquiry {
+  id              String        @id @default(cuid())
+  referenceCode   String        @unique
+  fullName        String
+  companyName     String
+  email           String
+  phone           String
+  enquiryType     String        @default("QUOTE_REQUEST") // QUOTE_REQUEST | GENERAL_INQUIRY | TECHNICAL_CONSULTATION | SERVICE_REQUEST
+  interestedTopic String?
+  productId       String?
+  product         Product?      @relation(fields: [productId], references: [id], onDelete: SetNull)
+  aiSolutionId    String?
+  aiSolution      AISolution?   @relation(fields: [aiSolutionId], references: [id], onDelete: SetNull)
+  serviceId       String?
+  service         Service?      @relation(fields: [serviceId], references: [id], onDelete: SetNull)
+  projectLocation String?
+  attachmentUrl   String?
+  message         String
+  sourcePage      String        @default("/")
+  status          String        @default("NEW") // NEW | CONTACTED | IN_PROGRESS | QUOTED | CLOSED | SPAM
+  ipHash          String?
+  notes           EnquiryNote[]
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([status, createdAt])
+  @@index([email])
+  @@index([productId])
+  @@index([aiSolutionId])
+  @@index([serviceId])
+}
+
+model EnquiryNote {
+  id         String   @id @default(cuid())
+  enquiryId  String
+  enquiry    Enquiry  @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  authorId   String?
+  author     User?    @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  authorName String
+  note       String
+  createdAt  DateTime @default(now())
+
+  @@index([enquiryId, createdAt])
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  clientName  String
+  companyName String
+  designation String?
+  feedback    String
+  clientImage String?
+  companyLogo String?
+  isFeatured  Boolean  @default(false)
+  status      String   @default("DRAFT") // DRAFT | PUBLISHED | ARCHIVED
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([status, sortOrder])
+}
+
+model Brand {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  logoUrl          String?
+  shortDescription String?
+  websiteUrl       String?
+  isFeatured       Boolean  @default(false)
+  status           String   @default("DRAFT") // DRAFT | PUBLISHED | ARCHIVED
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status, sortOrder])
+}
+
+model Industry {
+  id               String   @id @default(cuid())
+  name             String
+  slug             String   @unique
+  shortDescription String
+  applications     String   @default("[]") // JSON array of strings
+  icon             String   @default("Factory")
+  coverImage       String?
+  status           String   @default("PUBLISHED")
+  sortOrder        Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([status, sortOrder])
+}
+
+model Project {
+  id                   String   @id @default(cuid())
+  name                 String
+  slug                 String   @unique
+  industry             String
+  shortDescription     String
+  description          String
+  solutionsImplemented String   @default("[]") // JSON array of strings
+  coverImage           String?
+  status               String   @default("DRAFT") // DRAFT | PUBLISHED | ARCHIVED
+  isFeatured           Boolean  @default(false)
+  sortOrder            Int      @default(0)
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  @@index([status, isFeatured, sortOrder])
+}
+
+model PageContent {
+  id         String   @id @default(cuid())
+  pageKey    String   // e.g. "home", "about", "contact", "footer", "legal"
+  sectionKey String   // e.g. "hero", "about_preview", "why_choose_us", "mission_vision"
+  title      String?
+  subtitle   String?
+  content    String   @default("{}") // Structured JSON content
+  updatedBy  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([pageKey, sectionKey])
+  @@index([pageKey])
+}
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  group       String   @default("general") // "general" | "contact" | "navigation" | "seo" | "announcement"
+  description String?
+  updatedAt   DateTime @updatedAt
+
+  @@index([group])
+}
+
+model MediaAsset {
+  id           String   @id @default(cuid())
+  fileName     String
+  originalName String
+  mimeType     String
+  sizeBytes    Int
+  url          String   @unique
+  storageKey   String   @unique
+  altText      String   @default("")
+  width        Int?
+  height       Int?
+  uploadedById String?
+  uploadedBy   User?    @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userEmail  String
+  action     String   // e.g. "CREATE_PRODUCT", "UPDATE_ENQUIRY_STATUS", "LOGIN_SUCCESS"
+  entityType String
+  entityId   String?
+  details    String?
+  ipAddress  String?
+  createdAt  DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([entityType, entityId])
+}

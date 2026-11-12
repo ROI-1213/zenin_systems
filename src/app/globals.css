@@ -1,0 +1,198 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #081424;
+  --color-navy-900: #0B1730;
+  --color-navy-800: #142B49;
+  --color-navy-700: #1E3A5F;
+  --color-tech-blue: #1877F2;
+  --color-tech-blue-dark: #125EC4;
+  --color-cyan-accent: #00B8D9;
+  --color-cyan-accent-dark: #0095B0;
+  --color-text-primary: #172033;
+  --color-text-secondary: #64748B;
+  --color-surface-light: #F5F8FC;
+  --color-border-subtle: #E2E8F0;
+  --color-footer-dark: #081424;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-plus-jakarta), ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --primary-navy: #0B1730;
+  --secondary-blue: #142B49;
+  --tech-blue: #1877F2;
+  --cyan-accent: #00B8D9;
+  --text-primary: #172033;
+  --text-secondary: #64748B;
+  --bg-light: #F5F8FC;
+  --bg-white: #FFFFFF;
+  --border-color: #E2E8F0;
+  --footer-dark: #081424;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+html {
+  scroll-behavior: smooth;
+  color: var(--text-primary);
+  background-color: var(--bg-white);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #172033;
+  background-color: #FFFFFF;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+  overflow-wrap: break-word;
+}
+
+/* Thumb-friendly touch interaction defaults */
+button,
+a,
+select,
+input,
+textarea {
+  touch-action: manipulation;
+}
+
+/* Safe-area & Mobile App UI utilities */
+.pb-safe {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
+}
+
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.mobile-bottom-clearance {
+  padding-bottom: calc(5.25rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 1024px) {
+  .mobile-bottom-clearance {
+    padding-bottom: 0;
+  }
+}
+
+/* Hide scrollbars on horizontal pill carousels while preserving scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Luxury Enterprise Card & Glassmorphism System */
+.app-card {
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+  box-shadow: 0 8px 28px -6px rgba(11, 23, 48, 0.06),
+              0 2px 6px -1px rgba(11, 23, 48, 0.04);
+}
+
+@media (hover: hover) {
+  .app-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 48px -12px rgba(24, 119, 242, 0.16),
+                0 8px 20px -6px rgba(11, 23, 48, 0.08);
+  }
+}
+
+.app-card:active {
+  transform: scale(0.99);
+}
+
+/* Glassmorphism panels */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-panel-dark {
+  background: rgba(14, 30, 58, 0.78);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Slow Ken-Burns image zoom on card hover */
+.cinematic-img {
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.5s ease;
+}
+
+.group:hover .cinematic-img {
+  transform: scale(1.07);
+}
+
+.touch-btn {
+  min-height: 48px;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.22s ease,
+              box-shadow 0.25s ease,
+              border-color 0.22s ease;
+}
+
+.touch-btn:active {
+  transform: scale(0.97);
+}
+
+/* Enterprise subtle industrial grid background pattern */
+.bg-industrial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@media (min-width: 640px) {
+  .bg-industrial-grid {
+    background-size: 40px 40px;
+  }
+}
+
+.bg-light-grid {
+  background-image: 
+    linear-gradient(to right, rgba(11, 23, 48, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(11, 23, 48, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Visible accessibility focus ring */
+:focus-visible {
+  outline: 2px solid #00B8D9;
+  outline-offset: 2px;
+}
