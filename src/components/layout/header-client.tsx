@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   ChevronDown,
@@ -122,8 +123,15 @@ export function HeaderClient({
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
           {/* LEFT: COMPANY LOGO */}
           <Link href="/" className="group flex min-h-[48px] items-center gap-2.5 sm:gap-3">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1877F2] to-[#00B8D9] text-white shadow-md transition-transform group-hover:scale-105 sm:h-11 sm:w-11">
-              <Cpu className="h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="relative flex h-10 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-2 py-1 shadow-xs transition-transform group-hover:scale-105 sm:h-12 border border-slate-200/80">
+              <Image
+                src="/images/logo.png"
+                alt="Zenin Systems Solutions LLP"
+                width={150}
+                height={48}
+                priority
+                className="h-8 sm:h-10 w-auto object-contain"
+              />
             </div>
             <div className="flex flex-col">
               <span

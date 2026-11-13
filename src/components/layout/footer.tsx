@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-import { Cpu, Mail, MapPin, Phone, ArrowUpRight, Shield } from "lucide-react";
+import Image from "next/image";
+import { Mail, MapPin, Phone, ArrowUpRight, Shield } from "lucide-react";
 import { getPublicNavigationData } from "@/lib/db/queries";
 
 export async function Footer() {
@@ -25,10 +26,16 @@ export async function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Link
               href="/"
-              className="inline-flex min-h-[48px] items-center gap-3 rounded-xl py-1"
+              className="group inline-flex min-h-[48px] items-center gap-3 rounded-xl py-1"
             >
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-[#1877F2] to-[#00B8D9] text-white shadow-md">
-                <Cpu className="h-5 w-5" />
+              <div className="relative flex h-12 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-2.5 py-1 shadow-md transition-transform group-hover:scale-105 border border-white/20">
+                <Image
+                  src="/images/logo.png"
+                  alt="Zenin Systems Solutions LLP"
+                  width={160}
+                  height={52}
+                  className="h-10 w-auto object-contain"
+                />
               </div>
               <div className="flex flex-col">
                 <span className="text-lg font-extrabold tracking-tight text-white">

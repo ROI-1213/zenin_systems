@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -68,16 +69,22 @@ export function AdminShell({ user, title, subtitle, children }: AdminShellProps)
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex h-16 items-center justify-between border-b border-white/10 px-5">
-          <Link href="/admin/dashboard" className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#1877F2] to-[#00B8D9] text-white">
-              <Cpu className="h-5 w-5" />
+        <div className="flex h-16 items-center justify-between border-b border-white/10 px-4">
+          <Link href="/admin/dashboard" className="group flex items-center gap-2.5">
+            <div className="relative flex h-10 w-auto items-center justify-center overflow-hidden rounded-lg bg-white px-2 py-1 shadow-sm transition-transform group-hover:scale-105 border border-white/20">
+              <Image
+                src="/images/logo.png"
+                alt="Zenin Systems"
+                width={120}
+                height={36}
+                className="h-7 w-auto object-contain"
+              />
             </div>
             <div>
               <div className="text-sm font-extrabold tracking-tight text-white">
                 ZENIN <span className="text-[#00B8D9]">CMS</span>
               </div>
-              <div className="text-[10px] tracking-widest text-slate-400 uppercase">
+              <div className="text-[9px] tracking-widest text-slate-400 uppercase">
                 Admin Portal
               </div>
             </div>

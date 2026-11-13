@@ -1,8 +1,9 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { redirect } from "next/navigation";
-import { Cpu, ShieldCheck, ArrowLeft } from "lucide-react";
+import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { getAdminSession } from "@/lib/auth";
 import { AdminLoginForm } from "@/components/admin/login-form";
 
@@ -21,15 +22,19 @@ export default async function AdminLoginPage() {
     <div className="flex min-h-screen flex-col justify-center bg-[#0B1730] bg-industrial-grid px-4 py-12">
       <div className="mx-auto w-full max-w-md">
         <div className="mb-8 text-center">
-          <Link href="/" className="inline-flex items-center gap-3">
-            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-[#1877F2] to-[#00B8D9] text-white shadow-lg">
-              <Cpu className="h-6 w-6" />
+          <Link href="/" className="group inline-flex flex-col items-center gap-2">
+            <div className="relative flex h-16 w-auto items-center justify-center overflow-hidden rounded-2xl bg-white px-4 py-2 shadow-xl border border-white/20 transition-transform group-hover:scale-105">
+              <Image
+                src="/images/logo.png"
+                alt="Zenin Systems Solutions LLP"
+                width={200}
+                height={64}
+                priority
+                className="h-12 w-auto object-contain"
+              />
             </div>
-            <div className="text-left">
-              <div className="text-xl font-extrabold tracking-tight text-white">
-                ZENIN <span className="text-[#00B8D9]">SYSTEMS</span>
-              </div>
-              <div className="text-[10px] font-semibold tracking-[0.2em] text-slate-300 uppercase">
+            <div className="mt-1 text-center">
+              <div className="text-xs font-bold tracking-[0.22em] text-[#00B8D9] uppercase">
                 Enterprise Admin CMS
               </div>
             </div>
