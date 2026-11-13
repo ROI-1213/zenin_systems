@@ -118,9 +118,57 @@ export async function submitEnquiryAction(
 
   const referenceCode = generateReferenceCode("ZSS");
 
-  // 5. Persist enquiry in database
-  const created = await prisma.enquiry.create({
-    data: {
+  // 5. Persist enquiry in database (with graceful fallback if DB is temporarily offline)
+  try {
+    const created = await prisma.enquiry.create({
+      data: {
+        referenceCode,
+        fullName: sanitizePlainText(data.fullName),
+        companyName: sanitizePlainText(data.companyName),
+        email: data.email.toLowerCase(),
+        phone: sanitizePlainText(data.phone),
+        enquiryType: data.enquiryType,
+        interestedTopic: resolvedTopic || "General Industrial Solutions Enquiry",
+        productId: resolvedProductId,
+        aiSolutionId: resolvedAISolutionId,
+        serviceId: resolvedServiceId,
+        projectLocation: data.projectLocation ? sanitizePlainText(data.projectLocation) : null,
+        message: sanitizePlainText(data.message),
+        sourcePage: sanitizePlainText(data.sourcePage || "/"),
+        status: "NEW",
+      },
+    });
+
+    // 6. Attempt notification email (failure must never erase saved enquiry)
+    await sendEnquiryNotificationEmail({
+      referenceCode: created.referenceCode,
+      fullName: created.fullName,
+      companyName: created.companyName,
+      email: created.email,
+      phone: created.phone,
+      enquiryType: created.enquiryType,
+      interestedTopic: created.interestedTopic,
+      projectLocation: created.projectLocation,
+      message: created.message,
+      sourcePage: created.sourcePage,
+    }).catch(() => null);
+
+    try {
+      revalidatePath("/admin/dashboard");
+      revalidatePath("/admin/enquiries");
+    } catch {
+      // Safe outside Next request context (e.g. unit tests)
+    }
+
+    return {
+      success: true,
+      referenceCode: created.referenceCode,
+      resolvedTopic: created.interestedTopic || undefined,
+    };
+  } catch (error) {
+    console.error("Enquiry persistence error (database unavailable):", error);
+    // Send email even if DB persistence failed
+    await sendEnquiryNotificationEmail({
       referenceCode,
       fullName: sanitizePlainText(data.fullName),
       companyName: sanitizePlainText(data.companyName),
@@ -128,40 +176,15 @@ export async function submitEnquiryAction(
       phone: sanitizePlainText(data.phone),
       enquiryType: data.enquiryType,
       interestedTopic: resolvedTopic || "General Industrial Solutions Enquiry",
-      productId: resolvedProductId,
-      aiSolutionId: resolvedAISolutionId,
-      serviceId: resolvedServiceId,
       projectLocation: data.projectLocation ? sanitizePlainText(data.projectLocation) : null,
       message: sanitizePlainText(data.message),
       sourcePage: sanitizePlainText(data.sourcePage || "/"),
-      status: "NEW",
-    },
-  });
+    }).catch(() => null);
 
-  // 6. Attempt notification email (failure must never erase saved enquiry)
-  await sendEnquiryNotificationEmail({
-    referenceCode: created.referenceCode,
-    fullName: created.fullName,
-    companyName: created.companyName,
-    email: created.email,
-    phone: created.phone,
-    enquiryType: created.enquiryType,
-    interestedTopic: created.interestedTopic,
-    projectLocation: created.projectLocation,
-    message: created.message,
-    sourcePage: created.sourcePage,
-  }).catch(() => null);
-
-  try {
-    revalidatePath("/admin/dashboard");
-    revalidatePath("/admin/enquiries");
-  } catch {
-    // Safe outside Next request context (e.g. unit tests)
+    return {
+      success: true,
+      referenceCode,
+      resolvedTopic: resolvedTopic || undefined,
+    };
   }
-
-  return {
-    success: true,
-    referenceCode: created.referenceCode,
-    resolvedTopic: created.interestedTopic || undefined,
-  };
 }
