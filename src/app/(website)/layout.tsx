@@ -4,6 +4,7 @@ import { Footer } from "@/components/layout/footer";
 import { BackToTop } from "@/components/layout/back-to-top";
 import { MobileBottomNav } from "@/components/layout/mobile-bottom-nav";
 import { ScrollProgressBar } from "@/components/ui/cinematic-motion";
+import { SmoothScroll } from "@/components/layout/smooth-scroll";
 
 export default function WebsiteLayout({
   children,
@@ -12,6 +13,7 @@ export default function WebsiteLayout({
 }) {
   return (
     <div className="flex min-h-dvh flex-col bg-white">
+      <SmoothScroll />
       <ScrollProgressBar />
       <Header />
       <main id="main-content" className="flex-1 w-full max-w-full overflow-x-hidden">
