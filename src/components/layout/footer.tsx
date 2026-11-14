@@ -93,26 +93,16 @@ export async function Footer() {
           <div className="sm:col-span-2 lg:col-span-4">
             <Link
               href="/"
-              className="group inline-flex min-h-[48px] items-center gap-3.5 py-1"
+              className="group inline-flex min-h-[56px] items-center py-1"
             >
-              <div className="relative flex h-14 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-3 py-1.5 shadow-sm transition-transform group-hover:scale-105 border border-slate-200">
-                <Image
-                  src="/images/logo.png"
-                  alt="Zenin Systems Solutions LLP"
-                  width={200}
-                  height={65}
-                  priority
-                  className="h-10 w-auto object-contain"
-                />
-              </div>
-              <div className="flex flex-col">
-                <span className="text-base font-extrabold tracking-tight text-white sm:text-lg leading-tight">
-                  ZENIN <span className="text-[#00B8D9]">SYSTEMS</span>
-                </span>
-                <span className="text-[10px] font-bold tracking-[0.2em] text-slate-400 uppercase">
-                  SOLUTIONS LLP
-                </span>
-              </div>
+              <Image
+                src="/images/logo-white.png"
+                alt="Zenin Systems Solutions LLP"
+                width={280}
+                height={180}
+                priority
+                className="h-14 w-auto object-contain transition-transform group-hover:scale-105 sm:h-16"
+              />
             </Link>
 
             <p className="mt-4 text-sm leading-relaxed text-slate-400">

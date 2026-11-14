@@ -115,41 +115,21 @@ export function HeaderClient({
       <div className="w-full px-3 pt-2.5 sm:px-6 sm:pt-3.5 lg:px-8">
         <div
           onMouseLeave={() => setActiveDropdown(null)}
-          className={`mx-auto max-w-7xl overflow-hidden rounded-2xl sm:rounded-3xl transition-all duration-300 ${
-            scrolled
-              ? "border border-[#E2E8F0] bg-white/95 text-[#0B1730] shadow-xl backdrop-blur-xl"
-              : "border border-white/15 bg-[#0B1730]/90 text-white shadow-2xl backdrop-blur-xl"
+          className={`mx-auto max-w-7xl overflow-hidden rounded-2xl sm:rounded-3xl transition-all duration-300 border border-slate-200/90 bg-white/95 text-[#0B1730] shadow-lg backdrop-blur-xl ${
+            scrolled ? "shadow-xl border-slate-300" : ""
           }`}
         >
           <div className="flex h-16 items-center justify-between px-4 sm:h-22 sm:px-6 lg:px-8">
-          {/* LEFT: COMPANY LOGO */}
-          <Link href="/" className="group flex min-h-[48px] items-center gap-3 sm:gap-3.5">
-            <div className="relative flex h-12 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-3 py-1.5 shadow-sm transition-transform group-hover:scale-105 sm:h-16 border border-slate-200">
-              <Image
-                src="/images/logo.png"
-                alt="Zenin Systems Solutions LLP"
-                width={220}
-                height={72}
-                priority
-                className="h-9 sm:h-13 w-auto object-contain"
-              />
-            </div>
-            <div className="flex flex-col">
-              <span
-                className={`text-base font-extrabold tracking-tight leading-none sm:text-xl ${
-                  scrolled ? "text-[#0B1730]" : "text-white"
-                }`}
-              >
-                ZENIN <span className="text-[#00B8D9]">SYSTEMS</span>
-              </span>
-              <span
-                className={`mt-1 text-[9px] font-semibold tracking-[0.2em] uppercase sm:text-[11px] ${
-                  scrolled ? "text-slate-500" : "text-slate-300"
-                }`}
-              >
-                Solutions LLP
-              </span>
-            </div>
+          {/* LEFT: COMPANY LOGO (DISPLAY ONLY LOGO, BIGGER, NO BORDER) */}
+          <Link href="/" className="group flex min-h-[52px] items-center py-1">
+            <Image
+              src="/images/logo.png"
+              alt="Zenin Systems Solutions LLP"
+              width={280}
+              height={180}
+              priority
+              className="h-12 w-auto object-contain transition-transform group-hover:scale-105 sm:h-16 lg:h-18"
+            />
           </Link>
 
           {/* CENTER: DESKTOP NAVIGATION */}
@@ -161,10 +141,8 @@ export function HeaderClient({
               href="/"
               className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                 isActive("/")
-                  ? "text-[#00B8D9]"
-                  : scrolled
-                  ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
+                  ? "text-[#00B8D9] font-bold"
+                  : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
               }`}
             >
               Home
@@ -174,10 +152,8 @@ export function HeaderClient({
               href="/about-us"
               className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                 isActive("/about-us")
-                  ? "text-[#00B8D9]"
-                  : scrolled
-                  ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
+                  ? "text-[#00B8D9] font-bold"
+                  : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
               }`}
             >
               About Us
@@ -193,10 +169,8 @@ export function HeaderClient({
                 aria-expanded={activeDropdown === "products"}
                 className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition ${
                   isActive("/products")
-                    ? "text-[#00B8D9]"
-                    : scrolled
-                    ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "text-[#00B8D9] font-bold"
+                    : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
                 }`}
               >
                 <span>Products & Solutions</span>
@@ -218,10 +192,8 @@ export function HeaderClient({
                 aria-expanded={activeDropdown === "services"}
                 className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition ${
                   isActive("/services")
-                    ? "text-[#00B8D9]"
-                    : scrolled
-                    ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "text-[#00B8D9] font-bold"
+                    : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
                 }`}
               >
                 <span>Services</span>
@@ -238,10 +210,8 @@ export function HeaderClient({
                 href="/brands"
                 className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                   isActive("/brands")
-                    ? "text-[#00B8D9]"
-                    : scrolled
-                    ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "text-[#00B8D9] font-bold"
+                    : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
                 }`}
               >
                 Brands
@@ -253,10 +223,8 @@ export function HeaderClient({
                 href="/testimonials"
                 className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                   isActive("/testimonials")
-                    ? "text-[#00B8D9]"
-                    : scrolled
-                    ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                    : "text-slate-200 hover:bg-white/10 hover:text-white"
+                    ? "text-[#00B8D9] font-bold"
+                    : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
                 }`}
               >
                 Testimonials
@@ -267,10 +235,8 @@ export function HeaderClient({
               href="/contact-us"
               className={`rounded-lg px-3 py-2 text-sm font-semibold transition ${
                 isActive("/contact-us")
-                  ? "text-[#00B8D9]"
-                  : scrolled
-                  ? "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
-                  : "text-slate-200 hover:bg-white/10 hover:text-white"
+                  ? "text-[#00B8D9] font-bold"
+                  : "text-[#172033] hover:bg-slate-100 hover:text-[#1877F2]"
               }`}
             >
               Contact Us
@@ -282,7 +248,7 @@ export function HeaderClient({
             <div className="hidden sm:block">
               <QuoteModalTrigger
                 buttonText="Request a Quote"
-                variant={scrolled ? "primary" : "cyan"}
+                variant="primary"
                 size="md"
               />
             </div>
@@ -292,11 +258,7 @@ export function HeaderClient({
               onClick={() => setMobileMenuOpen((prev) => !prev)}
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
-              className={`touch-btn inline-flex h-12 w-12 items-center justify-center rounded-xl lg:hidden ${
-                scrolled
-                  ? "border border-[#E2E8F0] bg-[#F5F8FC] text-[#0B1730] hover:bg-slate-200"
-                  : "border border-white/15 bg-white/5 text-white hover:bg-white/15"
-              }`}
+              className="touch-btn inline-flex h-12 w-12 items-center justify-center rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] text-[#0B1730] hover:bg-slate-200 lg:hidden"
             >
               {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
