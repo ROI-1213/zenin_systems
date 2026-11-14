@@ -184,43 +184,44 @@ export function CinematicHero({
   const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden bg-[#060F20] py-12 text-white sm:py-20 lg:py-28">
-      {/* LAYER 1: HARDWARE-ACCELERATED BACKGROUND IMAGE */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 opacity-20 transform-gpu"
-        aria-hidden="true"
-      >
-        <Image
-          src={heroImage || "/images/hero/hero-command-center.png"}
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
+    <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+      <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/15 bg-[#060F20] py-12 text-white shadow-2xl sm:rounded-[36px] sm:py-16 lg:rounded-[44px] lg:py-20">
+        {/* LAYER 1: HARDWARE-ACCELERATED BACKGROUND IMAGE */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 opacity-20 transform-gpu"
+          aria-hidden="true"
+        >
+          <Image
+            src={heroImage || "/images/hero/hero-command-center.png"}
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover object-center"
+          />
+        </div>
+
+        {/* LAYER 2: GPU-OPTIMIZED RADIAL GLOWS & INDUSTRIAL GRID (ZERO HEAVY BLUR CALCULATION) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#060F20] via-[#0B1730]/92 to-[#0B1730]/80"
+          aria-hidden="true"
         />
-      </div>
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-industrial-grid opacity-80"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(24,119,242,0.18),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(0,184,217,0.15),transparent_50%)]"
+          aria-hidden="true"
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-t from-[#060F20] to-transparent"
+          aria-hidden="true"
+        />
 
-      {/* LAYER 2: GPU-OPTIMIZED RADIAL GLOWS & INDUSTRIAL GRID (ZERO HEAVY BLUR CALCULATION) */}
-      <div
-        className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#060F20] via-[#0B1730]/92 to-[#0B1730]/80"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-0 bg-industrial-grid opacity-80"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,rgba(24,119,242,0.18),transparent_50%),radial-gradient(circle_at_80%_80%,rgba(0,184,217,0.15),transparent_50%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-24 bg-gradient-to-t from-[#060F20] to-transparent"
-        aria-hidden="true"
-      />
-
-      {/* LAYER 3: FOREGROUND CONTENT & SHOWCASE */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12">
+        {/* LAYER 3: FOREGROUND CONTENT & SHOWCASE */}
+        <div className="relative z-10 px-5 sm:px-8 lg:px-12">
+          <div className="grid grid-cols-1 items-center gap-10 sm:gap-12 lg:grid-cols-12">
           {/* LEFT: ENTRANCE TYPOGRAPHY & CTAs */}
           <div className="lg:col-span-7">
             <motion.div
@@ -382,5 +383,6 @@ export function CinematicHero({
         </div>
       </div>
     </section>
+  </div>
   );
 }

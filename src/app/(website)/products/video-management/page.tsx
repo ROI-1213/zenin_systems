@@ -23,63 +23,65 @@ export default async function VideoManagementPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-16 text-white lg:py-22">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs
-            items={[
-              { label: "Products & Solutions", href: "/products" },
-              { label: "Video Management Solutions" },
-            ]}
-            light
-          />
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs
+              items={[
+                { label: "Products & Solutions", href: "/products" },
+                { label: "Video Management Solutions" },
+              ]}
+              light
+            />
 
-          <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-                <MonitorPlay className="h-3.5 w-3.5" />
-                <span>Core Solution Pillar 03</span>
+            <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+                  <MonitorPlay className="h-3.5 w-3.5" />
+                  <span>Core Solution Pillar 03</span>
+                </div>
+                <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+                  Enterprise Video Management Solutions (VMS)
+                </h1>
+                <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+                  Unify distributed industrial camera networks, AI analytics alerts,
+                  access control events, and perimeter sensors into a resilient,
+                  centralized command-and-control platform.
+                </p>
+
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <QuoteModalTrigger
+                    buttonText="Request VMS Architecture Proposal"
+                    variant="cyan"
+                    size="lg"
+                    preselectedTopicName="Video Management Solutions (VMS)"
+                  />
+                  <Link
+                    href="/products/cctv-surveillance"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white hover:bg-white/10"
+                  >
+                    <span>Industrial CCTV Hardware</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
-              <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                Enterprise Video Management Solutions (VMS)
-              </h1>
-              <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                Unify distributed industrial camera networks, AI analytics alerts,
-                access control events, and perimeter sensors into a resilient,
-                centralized command-and-control platform.
-              </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <QuoteModalTrigger
-                  buttonText="Request VMS Architecture Proposal"
-                  variant="cyan"
-                  size="lg"
-                  preselectedTopicName="Video Management Solutions (VMS)"
-                />
-                <Link
-                  href="/products/cctv-surveillance"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <span>Industrial CCTV Hardware</span>
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
-                <Image
-                  src="/images/pillars/video-management.png"
-                  alt="Centralized Video Management Command Center"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                />
+              <div className="lg:col-span-5">
+                <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
+                  <Image
+                    src="/images/pillars/video-management.png"
+                    alt="Centralized Video Management Command Center"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* CORE CAPABILITIES */}
       <section className="bg-white py-16 lg:py-20">

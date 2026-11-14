@@ -66,75 +66,77 @@ export default async function AISolutionDetailPage({
   return (
     <div>
       {/* 1 & 2. HERO BANNER & BREADCRUMB NAVIGATION */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-14 text-white lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs
-            items={[
-              { label: "Products & Solutions", href: "/products" },
-              {
-                label: "AI Video Analytics",
-                href: "/products/ai-video-analytics",
-              },
-              {
-                label: solution.categoryName,
-                href: `/products/ai-video-analytics#${solution.categorySlug}`,
-              },
-              { label: solution.name },
-            ]}
-            light
-          />
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs
+              items={[
+                { label: "Products & Solutions", href: "/products" },
+                {
+                  label: "AI Video Analytics",
+                  href: "/products/ai-video-analytics",
+                },
+                {
+                  label: solution.categoryName,
+                  href: `/products/ai-video-analytics#${solution.categorySlug}`,
+                },
+                { label: solution.name },
+              ]}
+              light
+            />
 
-          <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>{solution.categoryName}</span>
-              </div>
+            <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>{solution.categoryName}</span>
+                </div>
 
-              <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                {solution.name}
-              </h1>
+                <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+                  {solution.name}
+                </h1>
 
-              <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                {solution.shortDescription}
-              </p>
+                <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+                  {solution.shortDescription}
+                </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <QuoteModalTrigger
-                  buttonText={`Request a Quote — ${solution.name}`}
-                  variant="cyan"
-                  size="lg"
-                  aiSolutionId={solution.id}
-                  aiSolutionSlug={solution.slug}
-                  preselectedTopicName={solution.name}
-                />
-                <Link
-                  href="/products/ai-video-analytics"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  <span>All 21 AI Solutions</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
-                {solution.featuredImage && (
-                  <Image
-                    src={solution.featuredImage}
-                    alt={solution.name}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <QuoteModalTrigger
+                    buttonText={`Request a Quote — ${solution.name}`}
+                    variant="cyan"
+                    size="lg"
+                    aiSolutionId={solution.id}
+                    aiSolutionSlug={solution.slug}
+                    preselectedTopicName={solution.name}
                   />
-                )}
+                  <Link
+                    href="/products/ai-video-analytics"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span>All 21 AI Solutions</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
+                  {solution.featuredImage && (
+                    <Image
+                      src={solution.featuredImage}
+                      alt={solution.name}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* MAIN CONTENT & AUTO-ATTRIBUTED QUOTE SIDEBAR */}
       <section className="bg-white py-16 lg:py-20">

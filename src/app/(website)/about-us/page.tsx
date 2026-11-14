@@ -75,21 +75,23 @@ export default async function AboutUsPage() {
   return (
     <div>
       {/* 1. PAGE BANNER & BREADCRUMBS */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-16 text-white lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs items={[{ label: "About Us" }]} light />
-          <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-            {profileBlock.subtitle || "ABOUT ZENIN SYSTEMS SOLUTIONS LLP"}
-          </span>
-          <h1 className="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl">
-            {profileBlock.title ||
-              "Engineering Intelligent Infrastructure for Safer, Smarter Operations"}
-          </h1>
-          <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            {profileBlock.data.overview}
-          </p>
-        </div>
-      </section>
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs items={[{ label: "About Us" }]} light />
+            <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+              {profileBlock.subtitle || "ABOUT ZENIN SYSTEMS SOLUTIONS LLP"}
+            </span>
+            <h1 className="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl">
+              {profileBlock.title ||
+                "Engineering Intelligent Infrastructure for Safer, Smarter Operations"}
+            </h1>
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+              {profileBlock.data.overview}
+            </p>
+          </div>
+        </section>
+      </div>
 
       {/* 2. COMPANY OVERVIEW */}
       <section className="bg-white py-16 lg:py-20">

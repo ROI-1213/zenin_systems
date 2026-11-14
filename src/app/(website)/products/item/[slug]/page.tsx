@@ -46,65 +46,67 @@ export default async function ProductDetailPage({
   return (
     <div>
       {/* HERO */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-14 text-white lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs
-            items={[
-              { label: "Products & Solutions", href: "/products" },
-              { label: product.categoryName, href: `/products#${product.categorySlug}` },
-              { label: product.name },
-            ]}
-            light
-          />
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs
+              items={[
+                { label: "Products & Solutions", href: "/products" },
+                { label: product.categoryName, href: `/products#${product.categorySlug}` },
+                { label: product.name },
+              ]}
+              light
+            />
 
-          <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-                {product.categoryName}
-              </span>
-              <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
-                {product.name}
-              </h1>
-              <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                {product.shortDescription}
-              </p>
+            <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+                  {product.categoryName}
+                </span>
+                <h1 className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl lg:text-5xl">
+                  {product.name}
+                </h1>
+                <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
+                  {product.shortDescription}
+                </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-4">
-                <QuoteModalTrigger
-                  buttonText="Request a Quote for This System"
-                  variant="cyan"
-                  size="lg"
-                  productId={product.id}
-                  productSlug={product.slug}
-                  preselectedTopicName={product.name}
-                />
-                <Link
-                  href="/products"
-                  className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  <span>Back to Catalog</span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
-                {product.featuredImage && (
-                  <Image
-                    src={product.featuredImage}
-                    alt={product.name}
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
+                <div className="mt-8 flex flex-wrap items-center gap-4">
+                  <QuoteModalTrigger
+                    buttonText="Request a Quote for This System"
+                    variant="cyan"
+                    size="lg"
+                    productId={product.id}
+                    productSlug={product.slug}
+                    preselectedTopicName={product.name}
                   />
-                )}
+                  <Link
+                    href="/products"
+                    className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+                  >
+                    <ArrowLeft className="h-4 w-4" />
+                    <span>Back to Catalog</span>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="relative aspect-4/3 w-full overflow-hidden rounded-2xl border border-white/15 bg-[#142B49] shadow-2xl">
+                  {product.featuredImage && (
+                    <Image
+                      src={product.featuredImage}
+                      alt={product.name}
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 40vw"
+                      className="object-cover"
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* OVERVIEW, FEATURES, SPECS & APPLICATIONS */}
       <section className="bg-white py-16 lg:py-20">

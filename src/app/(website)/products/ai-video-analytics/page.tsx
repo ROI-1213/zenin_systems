@@ -36,81 +36,83 @@ export default async function AIVideoAnalyticsHubPage() {
   return (
     <div>
       {/* 1. AI-FOCUSED HERO */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-16 text-white lg:py-22">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs
-            items={[
-              { label: "Products & Solutions", href: "/products" },
-              { label: "AI Video Analytics & AI Vision Solutions" },
-            ]}
-            light
-          />
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs
+              items={[
+                { label: "Products & Solutions", href: "/products" },
+                { label: "AI Video Analytics & AI Vision Solutions" },
+              ]}
+              light
+            />
 
-          <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
-            <div className="lg:col-span-8">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-4 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>
-                  5 Application Domains • {totalSolutionsCount} Specialized AI Vision
-                  Solutions
-                </span>
-              </div>
-              <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                AI Video Analytics & Industrial Computer Vision Suite
-              </h1>
-              <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                Convert passive industrial CCTV cameras and production-line optical
-                sensors into real-time operational intelligence. Detect safety
-                violations, secure facility perimeters, inspect surface quality, and
-                monitor thermal anomalies automatically.
-              </p>
-
-              <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
-                <QuoteModalTrigger
-                  buttonText="Request AI Vision Demo & Quote"
-                  variant="cyan"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                  preselectedTopicName="AI Video Analytics & AI Vision Suite"
-                />
-                <a
-                  href="#category-navigation"
-                  className="touch-btn inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white hover:bg-white/10 sm:w-auto"
-                >
-                  <span>Browse All {totalSolutionsCount} AI Applications</span>
-                  <ArrowRight className="h-4 w-4 shrink-0" />
-                </a>
-              </div>
-            </div>
-
-            <div className="lg:col-span-4">
-              <div className="rounded-2xl border border-[#00B8D9]/30 bg-[#142B49]/90 p-6 shadow-2xl">
-                <div className="text-xs font-bold tracking-wider text-[#00B8D9] uppercase">
-                  Architecture Highlights
+            <div className="mt-4 grid grid-cols-1 items-center gap-10 lg:grid-cols-12">
+              <div className="lg:col-span-8">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-4 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span>
+                    5 Application Domains • {totalSolutionsCount} Specialized AI Vision
+                    Solutions
+                  </span>
                 </div>
-                <ul className="mt-4 space-y-3 text-xs text-slate-200 sm:text-sm">
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
-                    <span>Compatible with standard RTSP / ONVIF IP cameras</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
-                    <span>On-premise Edge & GPU Server deployment options</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
-                    <span>Real-time PLC, VMS, Siren & Webhook alert outputs</span>
-                  </li>
-                  <li className="flex items-start gap-2.5">
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
-                    <span>Custom model training for plant-specific SOPs</span>
-                  </li>
-                </ul>
+                <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
+                  AI Video Analytics & Industrial Computer Vision Suite
+                </h1>
+                <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                  Convert passive industrial CCTV cameras and production-line optical
+                  sensors into real-time operational intelligence. Detect safety
+                  violations, secure facility perimeters, inspect surface quality, and
+                  monitor thermal anomalies automatically.
+                </p>
+
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
+                  <QuoteModalTrigger
+                    buttonText="Request AI Vision Demo & Quote"
+                    variant="cyan"
+                    size="lg"
+                    className="w-full sm:w-auto"
+                    preselectedTopicName="AI Video Analytics & AI Vision Suite"
+                  />
+                  <a
+                    href="#category-navigation"
+                    className="touch-btn inline-flex min-h-[50px] w-full items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3.5 text-sm font-semibold text-white hover:bg-white/10 sm:w-auto"
+                  >
+                    <span>Browse All {totalSolutionsCount} AI Applications</span>
+                    <ArrowRight className="h-4 w-4 shrink-0" />
+                  </a>
+                </div>
+              </div>
+
+              <div className="lg:col-span-4">
+                <div className="rounded-2xl border border-[#00B8D9]/30 bg-[#142B49]/90 p-6 shadow-2xl">
+                  <div className="text-xs font-bold tracking-wider text-[#00B8D9] uppercase">
+                    Architecture Highlights
+                  </div>
+                  <ul className="mt-4 space-y-3 text-xs text-slate-200 sm:text-sm">
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
+                      <span>Compatible with standard RTSP / ONVIF IP cameras</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
+                      <span>On-premise Edge & GPU Server deployment options</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
+                      <span>Real-time PLC, VMS, Siren & Webhook alert outputs</span>
+                    </li>
+                    <li className="flex items-start gap-2.5">
+                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#00B8D9]" />
+                      <span>Custom model training for plant-specific SOPs</span>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       {/* 2. CATEGORY NAVIGATION ANCHOR BAR */}
       <div

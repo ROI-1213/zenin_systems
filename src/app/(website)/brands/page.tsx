@@ -20,22 +20,24 @@ export default async function BrandsPage() {
   return (
     <div>
       {/* HERO */}
-      <section className="bg-[#0B1730] bg-industrial-grid py-16 text-white lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Breadcrumbs items={[{ label: "Brands" }]} light />
-          <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-            Technology Ecosystem
-          </span>
-          <h1 className="mt-4 max-w-3xl text-3xl font-extrabold tracking-tight sm:text-5xl">
-            Brands & Hardware Integration Ecosystem
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
-            Zenin Systems integrates standards-compliant industrial imaging, networking,
-            fire safety, and automation equipment tailored to each client&apos;s
-            approved vendor list and project specifications.
-          </p>
-        </div>
-      </section>
+      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+          <div className="px-5 sm:px-8 lg:px-12">
+            <Breadcrumbs items={[{ label: "Brands" }]} light />
+            <span className="inline-block rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+              Technology Ecosystem
+            </span>
+            <h1 className="mt-4 max-w-3xl text-3xl font-extrabold tracking-tight sm:text-5xl">
+              Brands & Hardware Integration Ecosystem
+            </h1>
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-300">
+              Zenin Systems integrates standards-compliant industrial imaging, networking,
+              fire safety, and automation equipment tailored to each client&apos;s
+              approved vendor list and project specifications.
+            </p>
+          </div>
+        </section>
+      </div>
 
       {/* BRANDS GRID OR NEUTRAL EMPTY STATE */}
       <section className="bg-white py-16 lg:py-20">
