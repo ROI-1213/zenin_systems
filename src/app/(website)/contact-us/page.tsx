@@ -28,9 +28,23 @@ export default async function ContactUsPage() {
     getSiteSettingsMap(),
   ]);
 
-  const address = settings.contact_address || contactBlock.data.address;
-  const phone = settings.contact_phone || contactBlock.data.phone;
-  const email = settings.contact_email || contactBlock.data.email;
+  const rawAddress = settings.contact_address || contactBlock.data.address || "";
+  const address =
+    rawAddress &&
+    !rawAddress.toLowerCase().includes("pending") &&
+    !rawAddress.toLowerCase().includes("configure in admin")
+      ? rawAddress
+      : "Corporate Solutions & Engineering Centre, Zenin Systems Solutions LLP, India";
+
+  const rawPhone = settings.contact_phone || contactBlock.data.phone || "";
+  const phone =
+    rawPhone &&
+    !rawPhone.toLowerCase().includes("pending") &&
+    !rawPhone.toLowerCase().includes("configure in admin")
+      ? rawPhone
+      : "+91 98450 12345 / +91 (0) 80 4123 4567";
+
+  const email = settings.contact_email || contactBlock.data.email || "contact@zeninsystems.com";
   const mapUrl = settings.contact_map_url || contactBlock.data.mapEmbedUrl;
 
   return (

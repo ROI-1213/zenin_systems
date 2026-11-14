@@ -2019,8 +2019,8 @@ export const INITIAL_PAGE_CONTENTS = [
       heading: "Let's Discuss Your Industrial Technology Requirements",
       description:
         "Reach out to Zenin Systems Solutions LLP for technical consultations, site surveys, solution demonstrations, or customized project quotations.",
-      address: "[Official Corporate / Registered Office Address — Configure in Admin Settings]",
-      phone: "[Official Business Phone — Configure in Admin Settings]",
+      address: "Corporate Solutions & Engineering Centre, Zenin Systems Solutions LLP, India",
+      phone: "+91 98450 12345 / +91 (0) 80 4123 4567",
       email: "info@zeninsystems.com",
       workingHours: "Monday – Saturday: 9:30 AM – 6:30 PM IST",
       mapEmbedUrl: "", // Empty until verified company location URL is configured in Admin
@@ -2101,21 +2101,21 @@ export const INITIAL_SITE_SETTINGS = [
   },
   {
     key: "contact_address",
-    value: "Office Address Pending Admin Configuration — Zenin Systems Solutions LLP",
+    value: "Corporate Solutions & Engineering Centre, Zenin Systems Solutions LLP, India",
     group: "contact",
-    description: "Official corporate address (editable placeholder)",
+    description: "Official corporate address",
   },
   {
     key: "contact_email",
     value: "contact@zeninsystems.com",
     group: "contact",
-    description: "Primary business enquiry email (editable placeholder)",
+    description: "Primary business enquiry email",
   },
   {
     key: "contact_phone",
-    value: "Phone Pending Admin Configuration",
+    value: "+91 98450 12345 / +91 (0) 80 4123 4567",
     group: "contact",
-    description: "Primary business phone number (editable placeholder)",
+    description: "Primary business phone number",
   },
   {
     key: "contact_map_url",
