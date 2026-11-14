@@ -28,13 +28,13 @@ export async function Footer() {
               href="/"
               className="group inline-flex min-h-[48px] items-center gap-3 rounded-xl py-1"
             >
-              <div className="relative flex h-12 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-2.5 py-1 shadow-md transition-transform group-hover:scale-105 border border-white/20">
+              <div className="relative flex h-16 w-auto items-center justify-center overflow-hidden rounded-2xl bg-white px-3.5 py-1.5 shadow-md transition-transform group-hover:scale-105 border border-white/20">
                 <Image
                   src="/images/logo.png"
                   alt="Zenin Systems Solutions LLP"
-                  width={160}
-                  height={52}
-                  className="h-10 w-auto object-contain"
+                  width={220}
+                  height={72}
+                  className="h-13 w-auto object-contain"
                 />
               </div>
               <div className="flex flex-col">

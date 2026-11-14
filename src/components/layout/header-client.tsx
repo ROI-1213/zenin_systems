@@ -120,29 +120,29 @@ export function HeaderClient({
             : "border-b border-white/10 bg-[#0B1730] text-white"
         }`}
       >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-20 sm:px-6 lg:px-8">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-22 sm:px-6 lg:px-8">
           {/* LEFT: COMPANY LOGO */}
-          <Link href="/" className="group flex min-h-[48px] items-center gap-2.5 sm:gap-3">
-            <div className="relative flex h-10 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-2 py-1 shadow-xs transition-transform group-hover:scale-105 sm:h-12 border border-slate-200/80">
+          <Link href="/" className="group flex min-h-[48px] items-center gap-3 sm:gap-3.5">
+            <div className="relative flex h-12 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-3 py-1.5 shadow-sm transition-transform group-hover:scale-105 sm:h-16 border border-slate-200">
               <Image
                 src="/images/logo.png"
                 alt="Zenin Systems Solutions LLP"
-                width={150}
-                height={48}
+                width={220}
+                height={72}
                 priority
-                className="h-8 sm:h-10 w-auto object-contain"
+                className="h-9 sm:h-13 w-auto object-contain"
               />
             </div>
             <div className="flex flex-col">
               <span
-                className={`text-base font-extrabold tracking-tight leading-none sm:text-lg ${
+                className={`text-base font-extrabold tracking-tight leading-none sm:text-xl ${
                   scrolled ? "text-[#0B1730]" : "text-white"
                 }`}
               >
                 ZENIN <span className="text-[#00B8D9]">SYSTEMS</span>
               </span>
               <span
-                className={`mt-0.5 text-[9px] font-semibold tracking-[0.18em] uppercase sm:text-[10px] ${
+                className={`mt-1 text-[9px] font-semibold tracking-[0.2em] uppercase sm:text-[11px] ${
                   scrolled ? "text-slate-500" : "text-slate-300"
                 }`}
               >

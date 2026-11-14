@@ -23,14 +23,14 @@ export default async function AdminLoginPage() {
       <div className="mx-auto w-full max-w-md">
         <div className="mb-8 text-center">
           <Link href="/" className="group inline-flex flex-col items-center gap-2">
-            <div className="relative flex h-16 w-auto items-center justify-center overflow-hidden rounded-2xl bg-white px-4 py-2 shadow-xl border border-white/20 transition-transform group-hover:scale-105">
+            <div className="relative flex h-20 w-auto items-center justify-center overflow-hidden rounded-2xl bg-white px-5 py-2.5 shadow-xl border border-white/20 transition-transform group-hover:scale-105">
               <Image
                 src="/images/logo.png"
                 alt="Zenin Systems Solutions LLP"
-                width={200}
-                height={64}
+                width={260}
+                height={84}
                 priority
-                className="h-12 w-auto object-contain"
+                className="h-16 w-auto object-contain"
               />
             </div>
             <div className="mt-1 text-center">
