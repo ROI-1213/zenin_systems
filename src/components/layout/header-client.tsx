@@ -112,15 +112,16 @@ export function HeaderClient({
         </div>
       )}
 
-      <div
-        onMouseLeave={() => setActiveDropdown(null)}
-        className={`w-full transition-all duration-200 ${
-          scrolled
-            ? "border-b border-[#E2E8F0] bg-white/95 text-[#0B1730] shadow-md backdrop-blur-md"
-            : "border-b border-white/10 bg-[#0B1730] text-white"
-        }`}
-      >
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-22 sm:px-6 lg:px-8">
+      <div className="w-full px-3 pt-2.5 sm:px-6 sm:pt-3.5 lg:px-8">
+        <div
+          onMouseLeave={() => setActiveDropdown(null)}
+          className={`mx-auto max-w-7xl overflow-hidden rounded-2xl sm:rounded-3xl transition-all duration-300 ${
+            scrolled
+              ? "border border-[#E2E8F0] bg-white/95 text-[#0B1730] shadow-xl backdrop-blur-xl"
+              : "border border-white/15 bg-[#0B1730]/90 text-white shadow-2xl backdrop-blur-xl"
+          }`}
+        >
+          <div className="flex h-16 items-center justify-between px-4 sm:h-22 sm:px-6 lg:px-8">
           {/* LEFT: COMPANY LOGO */}
           <Link href="/" className="group flex min-h-[48px] items-center gap-3 sm:gap-3.5">
             <div className="relative flex h-12 w-auto items-center justify-center overflow-hidden rounded-xl bg-white px-3 py-1.5 shadow-sm transition-transform group-hover:scale-105 sm:h-16 border border-slate-200">
@@ -451,12 +452,11 @@ export function HeaderClient({
             </div>
           </div>
         )}
-      </div>
 
-      {/* MOBILE ACCESSIBLE DRAWER */}
-      {mobileMenuOpen && (
-        <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto border-b border-white/15 bg-[#0B1730]/98 px-4 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] text-white shadow-2xl backdrop-blur-xl lg:hidden">
-          <div className="space-y-2">
+        {/* MOBILE ACCESSIBLE DRAWER */}
+        {mobileMenuOpen && (
+          <div className="max-h-[calc(100dvh-6rem)] overflow-y-auto border-t border-white/15 bg-[#0B1730]/98 px-4 pt-4 pb-[calc(6rem+env(safe-area-inset-bottom,0px))] text-white shadow-2xl backdrop-blur-xl lg:hidden">
+            <div className="space-y-2">
             <Link
               href="/"
               className="touch-btn flex min-h-[48px] items-center rounded-xl px-3.5 py-2.5 text-base font-semibold hover:bg-white/10"
@@ -600,6 +600,8 @@ export function HeaderClient({
           </div>
         </div>
       )}
+        </div>
+      </div>
     </header>
   );
 }
