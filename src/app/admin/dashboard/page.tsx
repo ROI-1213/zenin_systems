@@ -150,11 +150,11 @@ export default async function AdminDashboardPage() {
           <h2 className="text-base font-bold text-[#0B1730]">Quick CMS Actions</h2>
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {[
+              { label: "Edit Home Page", href: "/admin/home-page" },
               { label: "Manage Products", href: "/admin/products" },
               { label: "Manage 21 AI Solutions", href: "/admin/ai-solutions" },
               { label: "Manage 13 Services", href: "/admin/services" },
               { label: "Edit Page Content", href: "/admin/content" },
-              { label: "Publish Testimonials", href: "/admin/testimonials" },
               { label: "Update Site Settings", href: "/admin/settings" },
             ].map((act) => (
               <Link

@@ -884,7 +884,7 @@ export async function savePageContentAction(input: {
     details: `${input.pageKey}.${input.sectionKey}`,
   });
 
-  safeRevalidate(["/", "/about-us", "/contact-us", "/privacy-policy", "/terms-and-conditions", "/admin/content"]);
+  safeRevalidate(["/", "/about-us", "/contact-us", "/privacy-policy", "/terms-and-conditions", "/admin/content", "/admin/home-page"]);
   return { success: true, block: updated };
 }
 

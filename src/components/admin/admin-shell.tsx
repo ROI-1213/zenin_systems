@@ -6,6 +6,7 @@ import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
+  Home,
   Package,
   Layers,
   Sparkles,
@@ -29,11 +30,12 @@ import { logoutAdminAction } from "@/lib/actions/admin-actions";
 
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
+  { label: "Home Page Editor", href: "/admin/home-page", icon: Home },
   { label: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Product Categories", href: "/admin/categories", icon: Layers },
   { label: "AI Solutions (21)", href: "/admin/ai-solutions", icon: Sparkles },
-  { label: "Services (12)", href: "/admin/services", icon: Wrench },
+  { label: "Services (13)", href: "/admin/services", icon: Wrench },
   { label: "Testimonials", href: "/admin/testimonials", icon: MessageSquareQuote },
   { label: "Brands", href: "/admin/brands", icon: Award },
   { label: "Industries & Projects", href: "/admin/industries", icon: Factory },
