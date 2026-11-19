@@ -73,17 +73,17 @@ export default async function ProductsCatalogPage() {
                   id={cat.slug}
                   className="group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/60 shadow-2xs transition hover:border-[#1877F2] hover:bg-white hover:shadow-xl sm:flex-row"
                 >
-                  <div className="relative h-52 w-full shrink-0 overflow-hidden bg-[#0B1730] sm:h-auto sm:w-56">
+                  <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#0B1730] sm:h-auto sm:w-64 lg:w-72">
                     {cat.coverImage && (
                       <Image
                         src={cat.coverImage}
                         alt={cat.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, 224px"
+                        sizes="(max-width: 640px) 100vw, 288px"
                         className="object-cover transition duration-500 group-hover:scale-105"
                       />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/80 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
                     <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1877F2] text-white">
                       <DynamicIcon name={cat.icon} className="h-5 w-5" />
                     </div>
@@ -162,42 +162,62 @@ export default async function ProductsCatalogPage() {
               <div
                 key={cat.id}
                 id={cat.slug}
-                className="flex flex-col justify-between rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/50 p-6 transition hover:border-[#1877F2] hover:bg-white hover:shadow-md"
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/50 transition hover:border-[#1877F2] hover:bg-white hover:shadow-lg"
               >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0B1730] text-[#00B8D9]">
-                      <DynamicIcon name={cat.icon} className="h-5 w-5" />
+                {cat.coverImage && (
+                  <div className="relative h-44 w-full overflow-hidden bg-[#0B1730]">
+                    <Image
+                      src={cat.coverImage}
+                      alt={cat.name}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
+                    <div className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0B1730]/90 text-[#00B8D9] backdrop-blur-xs">
+                      <DynamicIcon name={cat.icon} className="h-4 w-4" />
                     </div>
-                    <PackageCheck className="h-4 w-4 text-slate-400" />
                   </div>
-                  <h3 className="mt-4 text-base font-bold text-[#0B1730]">
-                    {cat.name}
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:text-sm">
-                    {cat.shortDescription}
-                  </p>
-                </div>
+                )}
 
-                <div className="mt-5 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
-                  {cat.dedicatedRoute ? (
-                    <Link
-                      href={cat.dedicatedRoute}
-                      className="text-xs font-bold text-[#1877F2] hover:underline"
-                    >
-                      View Solution Page →
-                    </Link>
-                  ) : (
-                    <span className="text-[11px] font-medium text-[#64748B]">
-                      B2B Project Supply
-                    </span>
-                  )}
-                  <QuoteModalTrigger
-                    buttonText="Request BOQ Quote"
-                    variant="outline"
-                    size="sm"
-                    preselectedTopicName={cat.name}
-                  />
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    {!cat.coverImage && (
+                      <div className="flex items-center justify-between">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0B1730] text-[#00B8D9]">
+                          <DynamicIcon name={cat.icon} className="h-5 w-5" />
+                        </div>
+                        <PackageCheck className="h-4 w-4 text-slate-400" />
+                      </div>
+                    )}
+                    <h3 className={`${cat.coverImage ? "" : "mt-4"} text-base font-bold text-[#0B1730]`}>
+                      {cat.name}
+                    </h3>
+                    <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:text-sm">
+                      {cat.shortDescription}
+                    </p>
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
+                    {cat.dedicatedRoute ? (
+                      <Link
+                        href={cat.dedicatedRoute}
+                        className="text-xs font-bold text-[#1877F2] hover:underline"
+                      >
+                        View Solution Page →
+                      </Link>
+                    ) : (
+                      <span className="text-[11px] font-medium text-[#64748B]">
+                        B2B Project Supply
+                      </span>
+                    )}
+                    <QuoteModalTrigger
+                      buttonText="Request BOQ Quote"
+                      variant="outline"
+                      size="sm"
+                      preselectedTopicName={cat.name}
+                    />
+                  </div>
                 </div>
               </div>
             ))}

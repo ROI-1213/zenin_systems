@@ -268,6 +268,19 @@ export const WIDER_PORTFOLIO_CATEGORIES: SeedProductCategory[] = [
     isFeatured: false,
     sortOrder: 24,
   },
+  {
+    name: "Industrial Valves and Pumps",
+    slug: "industrial-valves-and-pumps",
+    shortDescription:
+      "Process control valves (ball, butterfly, globe, check & control valves with actuators) and heavy-duty industrial pumps for plant fluid handling.",
+    description:
+      "Comprehensive fluid handling and process flow control equipment including motorized/pneumatic actuated valves, high-pressure safety valves, centrifugal pumps, positive displacement pumps, and slurry handling systems engineered for demanding industrial, chemical, and manufacturing operations.",
+    icon: "Sliders",
+    coverImage: "/images/categories/industrial-valves-and-pumps.png",
+    isCoreSolution: false,
+    isFeatured: true,
+    sortOrder: 25,
+  },
 ];
 
 export const INITIAL_PRODUCTS = [
@@ -539,6 +552,161 @@ export const INITIAL_PRODUCTS = [
     isFeatured: false,
     requiresReview: true,
     sortOrder: 8,
+  },
+  {
+    name: "Customized Water Cooling Jackets & Protective Camera Enclosures",
+    slug: "customized-water-cooling-jackets-camera-enclosures",
+    categorySlug: "cctv-surveillance",
+    shortDescription:
+      "High-temperature stainless steel (SS316L/SS304) liquid cooling jackets and pneumatic air-purge enclosures engineered to protect CCTV and thermal cameras up to 1000°C–1800°C in harsh industrial conditions.",
+    description:
+      "Custom-manufactured protective enclosures and water-cooled jackets designed to safeguard critical CCTV, optical, and thermal imaging cameras deployed in extreme industrial environments such as blast furnaces, reheat furnaces, rotary cement kilns, glass melting tanks, and hazardous chemical bays. Features dual-corridor liquid circulation jackets, continuous high-velocity compressed air purging (air-curtain) to keep front optical windows free of dust, soot, and hot slag, and heat-resistant quartz/sapphire viewing windows.",
+    features: [
+      "Heavy-duty AISI 316L / 304 electro-polished stainless steel housing resistant to high heat and chemical corrosion",
+      "Double-walled liquid cooling jacket (water / chilled coolant circulation) rated up to 1000°C–1800°C radiant heat",
+      "Positive-pressure compressed air curtain purge to continuously clean optical windows from soot and particulates",
+      "Optional pneumatic or motorized auto-retraction cylinder interlocked with water flow and temperature telemetry",
+      "High-temperature optical quartz (visible) or Germanium / Sapphire (infrared radiometric) viewing windows",
+      "Internal thermal telemetry with PT100 RTD sensor and automated over-temperature relay protection",
+    ],
+    applications: [
+      "Blast furnace tuyere inspection, taphole, and torpedo ladle monitoring",
+      "Steel reheat furnace, slab caster, and hot strip rolling mill surveillance",
+      "Cement rotary kiln burning zones and clinker cooler chambers",
+      "Glass furnace melting tanks, regenerators, and forehearth monitoring",
+      "Incinerator and waste-to-energy boiler combustion chamber inspection",
+    ],
+    technicalSpecifications: [
+      { label: "Construction Material", value: "Stainless Steel AISI 316L / AISI 304" },
+      { label: "Radiant Heat Resistance", value: "Up to 1000°C standard, up to 1800°C with air-purge probe" },
+      { label: "Cooling Medium", value: "Industrial water / chilled glycol mixture (1-3 bar inlet)" },
+      { label: "Air Purge Requirement", value: "Dry, oil-free compressed air (2 to 4 bar pressure)" },
+      { label: "Optical Front Window", value: "Quartz / Vycor (Visual) or Germanium / Sapphire (Thermal/IR)" },
+      { label: "Fail-Safe Safety", value: "Pneumatic auto-retraction interlocked with PLC/SCADA" },
+    ],
+    integrationCapabilities: [
+      "Industrial High-Speed CCTV & PTZ Surveillance Assemblies",
+      "Radiometric Thermal Imaging Cameras & Pyrometers",
+      "Plant PLC / SCADA Cause-and-Effect Automation Interlocks",
+      "Central Control Room VMS and AI Analytics Networks",
+    ],
+    featuredImage: "/images/products/water-cooling-camera-jacket.png",
+    isFeatured: true,
+    requiresReview: true,
+    sortOrder: 9,
+  },
+  {
+    name: "High-Temperature Furnace & Kiln Thermal Monitoring Camera System",
+    slug: "furnace-kiln-thermal-monitoring-system",
+    categorySlug: "ai-video-analytics",
+    shortDescription:
+      "Continuous radiometric thermal monitoring and furnace combustion visual inspection with automated hotspot detection, burner flame analytics, and clinker tracking.",
+    description:
+      "Turnkey high-temperature thermal and visual monitoring system engineered for continuous inspection of boilers, metallurgical furnaces, rotary kilns, and thermal oxidizers. Combines specialized water-cooled optical probe cameras, uncooled radiometric microbolometers, and edge AI analytics to deliver live temperature profiles, burner symmetry verification, refractory lining wear tracking, and instant over-temperature alarms.",
+    features: [
+      "Real-time radiometric thermal temperature measurement across user-configured furnace zones",
+      "High-definition visual flame shape, combustion stability, and burner symmetry analytics",
+      "Refractory wall degradation, hotspot formation, and insulation breach detection",
+      "Water-cooling jacket with automated pneumatic retraction fail-safe mechanism",
+      "Seamless integration with plant DCS/SCADA via Modbus TCP, OPC-UA, and dry contact relays",
+    ],
+    applications: [
+      "Steel reheat furnaces, blast furnaces, and ladle preheaters",
+      "Cement rotary kiln burning zones and clinker cooler chambers",
+      "Petrochemical cracking furnaces and thermal oxidizers",
+      "Glass furnace melt tanks and regenerator crowns",
+    ],
+    technicalSpecifications: [
+      { label: "Temperature Measurement Range", value: "0°C to 1800°C (32°F to 3272°F)" },
+      { label: "Thermal Sensor", value: "High-resolution uncooled microbolometer / specialized CMOS" },
+      { label: "Probe Insertion Length", value: "400mm to 1200mm customizable water-cooled probe" },
+      { label: "Protocols Supported", value: "Modbus TCP/IP, OPC-UA, BACnet, ONVIF, RTSP" },
+      { label: "Alarm Outputs", value: "Dry contact relays, digital I/O, email, and SCADA triggers" },
+    ],
+    integrationCapabilities: [
+      "DCS / SCADA Process Control Platforms",
+      "Zenin AI Video Analytics Edge Inference Engines",
+      "Automated Safety Emergency Shutdown (ESD) Systems",
+    ],
+    featuredImage: "/images/products/furnace-thermal-monitoring.png",
+    isFeatured: true,
+    requiresReview: true,
+    sortOrder: 10,
+  },
+  {
+    name: "Industrial Process Valves & Automated Actuator Assemblies",
+    slug: "industrial-valves-actuators",
+    categorySlug: "industrial-valves-and-pumps",
+    shortDescription:
+      "High-pressure, chemical-resistant industrial valves including Ball, Butterfly, Gate, Globe, Check, and Pneumatic/Motorized Control Valves for critical plant fluid control.",
+    description:
+      "Comprehensive range of heavy-duty industrial valves and automated actuation systems engineered for precise fluid, steam, gas, and slurry control in manufacturing, chemical, power generation, water treatment, and process facilities. Available in cast iron, cast steel, stainless steel (SS304/SS316/Duplex), and alloy materials with manual, pneumatic, and electric motorized actuators integrated with plant PLC systems.",
+    features: [
+      "Wide valve family: Ball, Butterfly, Gate, Globe, Check, Knife Edge, and Pressure Relief Valves",
+      "Motorized electric (24V/230V/415V) and pneumatic rack-and-pinion actuators with smart electro-pneumatic positioners",
+      "Pressure ratings from ANSI Class 150 to Class 2500 and DIN PN10 to PN100",
+      "Corrosion-resistant trims, stellite hard facing, and PTFE/Metal-to-Metal tight shutoff seats",
+      "Compliant with international standards: API 6D, API 600, ASME B16.34, and ISO 5211 actuator mounting",
+    ],
+    applications: [
+      "Industrial cooling water loops and boiler steam distribution headers",
+      "Chemical processing, acid/alkali dosing, and corrosive fluid transfer",
+      "Industrial effluent treatment (ETP/STP) and raw water intake lines",
+      "HVAC hydronic balancing and district cooling distribution systems",
+    ],
+    technicalSpecifications: [
+      { label: "Size Range", value: "1/2 inch (DN15) up to 48 inch (DN1200)" },
+      { label: "Body Materials", value: "WCB, CF8, CF8M, Ductile Iron, Forged Steel, Duplex SS" },
+      { label: "Actuation Options", value: "Pneumatic double-acting / spring-return, Electric motorized, Manual gear" },
+      { label: "Control Signals", value: "4-20mA analog, 0-10V, Modbus, HART, Dry Contact feedback" },
+    ],
+    integrationCapabilities: [
+      "Plant Distributed Control Systems (DCS) & SCADA",
+      "Industrial PLC Interlocks and Emergency Shut-Off",
+      "Building Management Systems (IBMS / HVAC)",
+    ],
+    featuredImage: "/images/products/industrial-valves.png",
+    isFeatured: true,
+    requiresReview: true,
+    sortOrder: 11,
+  },
+  {
+    name: "Heavy-Duty Industrial Pumps & Fluid Handling Systems",
+    slug: "industrial-pumps-fluid-handling",
+    categorySlug: "industrial-valves-and-pumps",
+    shortDescription:
+      "High-efficiency centrifugal, positive displacement, multistage, slurry, and chemical dosing pumps engineered for continuous industrial operations.",
+    description:
+      "Engineered industrial pumping solutions built for arduous plant duties, continuous fluid circulation, abrasive slurry handling, and high-pressure chemical transfer. Supplied with high-efficiency IE3/IE4 electric motors, mechanical seal options, and integrated vibration and temperature sensors for predictive maintenance and condition monitoring.",
+    features: [
+      "Comprehensive pump designs: End-suction centrifugal, vertical multistage, chemical magnetic drive, slurry, and progressive cavity pumps",
+      "Heavy-duty cast steel, stainless steel (SS316/316L), and alloy wet ends for maximum wear and chemical resistance",
+      "Energy-efficient electric motor drives (IE3/IE4) with variable frequency drive (VFD) compatibility",
+      "Advanced mechanical seals with barrier fluid systems for hazardous and zero-leakage chemical services",
+      "Integrated IIoT sensor ports for real-time vibration, bearing temperature, and discharge pressure monitoring",
+    ],
+    applications: [
+      "Industrial cooling water circulation and chiller secondary loops",
+      "Boiler feedwater systems, condensate recovery, and high-pressure washing",
+      "Mining, mineral processing, and power plant slurry transportation",
+      "Chemical transfer, dosing, and effluent handling in ETP/STP plants",
+    ],
+    technicalSpecifications: [
+      { label: "Flow Capacity", value: "Up to 3,500 m³/hr (15,400 GPM) configurable" },
+      { label: "Discharge Head", value: "Up to 350 meters (1,150 ft)" },
+      { label: "Motor Rating", value: "0.75 kW to 350 kW (1 HP to 470 HP), 415V 50Hz" },
+      { label: "Wet-End Materials", value: "Cast Iron, SS304, SS316, Hastelloy, High-Chrome Alloy" },
+      { label: "Condition Telemetry", value: "Vibration transmitter, PT100 RTD bearing temperature, 4-20mA pressure" },
+    ],
+    integrationCapabilities: [
+      "Industrial Automation & VFD Control Panels",
+      "SCADA & Telemetry Monitoring Stations",
+      "Predictive Maintenance & Asset Health Systems",
+    ],
+    featuredImage: "/images/products/industrial-pumps.png",
+    isFeatured: true,
+    requiresReview: true,
+    sortOrder: 12,
   },
 ];
 
@@ -1219,37 +1387,41 @@ export const AI_SOLUTIONS_SEED: SeedAISolution[] = [
 
   // CATEGORY D — THERMAL & ENVIRONMENTAL MONITORING (3)
   {
-    name: "Thermal Monitoring",
+    name: "Thermal & Furnace Monitoring",
     slug: "thermal-monitoring",
     categoryCode: "CATEGORY_D",
     shortDescription:
-      "Continuous radiometric thermal imaging and AI temperature anomaly detection for critical plant equipment, vessels, and stockpiles.",
+      "Continuous radiometric thermal imaging, furnace flame inspection, and AI temperature anomaly detection for boilers, kilns, ladles, and critical plant equipment.",
     overview:
-      "Abnormal heat generation is one of the earliest indicators of mechanical friction, insulation breakdown, refractory wear, or spontaneous combustion in bulk storage. Thermal Monitoring pairs radiometric thermal cameras with intelligent threshold and rate-of-rise analytics.",
+      "Abnormal heat generation, refractory wear, and combustion instability in furnaces, rotary kilns, boilers, and electrical assets cause severe equipment damage and unbudgeted downtime. Thermal & Furnace Monitoring pairs high-temperature water-cooled probe cameras, radiometric thermal sensors, and edge AI vision to deliver real-time burner flame analysis, refractory hot-spot alerts, and automated rate-of-rise temperature alarms.",
     problemStatement:
-      "Periodic manual thermography inspections only capture a snapshot once a month or quarter, missing sudden thermal runaways between scheduled checks.",
+      "Periodic manual pyrometry and spot thermography only capture occasional snapshots, missing sudden furnace flame impingement, burner upsets, or refractory breakdown between shifts.",
     howItWorks:
-      "Fixed thermal sensors continuously measure surface temperature across multiple Regions of Interest (ROIs), alerting operators when absolute temperature limits, delta-T comparisons, or rapid heating trends are detected.",
+      "High-temperature water-cooled probe cameras and fixed thermal sensors continuously measure surface and flame temperatures across multiple furnace Regions of Interest (ROIs), instantly alerting operators and plant DCS/SCADA when thermal thresholds or rapid heating trends are detected.",
     capabilities: [
-      "Multi-zone temperature threshold and rate-of-temperature-rise alerts",
-      "Early hotspot detection in coal/biomass stockpiles and storage silos",
-      "Rotary kiln shell, refractory, and bearing heat monitoring",
-      "Radiometric thermal + visible bi-spectrum overlay visualization",
+      "High-temperature furnace flame symmetry, burner combustion stability, and clinker tracking",
+      "Refractory lining degradation, kiln shell hotspot detection, and insulation breach alerts",
+      "Multi-zone temperature threshold, delta-T comparisons, and rate-of-temperature-rise alerts",
+      "Water-cooled camera probe telemetry with automated fail-safe pneumatic retraction alerting",
+      "Early hotspot detection in coal/biomass stockpiles, rotary kilns, and storage silos",
+      "Radiometric thermal + visible bi-spectrum false-color overlay visualization",
     ],
     applicableIndustries: [
-      "Power Plants, Cement & Steel",
+      "Power Plants, Cement & Steel Mills",
       "Chemical, Petrochemical & Refineries",
-      "Coal Yards, Biomass & Waste Management",
-      "Battery Storage & Data Centers",
+      "Glass Melting & Metallurgical Foundries",
+      "Coal Yards, Biomass & Waste-to-Energy Boilers",
+      "Battery Storage & Mission-Critical Data Centers",
     ],
     benefits: [
-      "Identifies overheating equipment before catastrophic failure or fire",
-      "Replaces periodic manual spot-checks with 24/7 continuous telemetry",
-      "Integrates temperature trend alarms directly into the control room",
+      "Continuously monitors internal furnace combustion and refractory health up to 1800°C",
+      "Identifies overheating assets and hotspots days before catastrophic failure or fire",
+      "Replaces dangerous manual inspection with 24/7 automated telemetry and fail-safe retraction",
+      "Integrates temperature trend alarms directly into the central control room and DCS",
     ],
     integrationInfo:
-      "Supports radiometric thermal IP cameras, Modbus TCP temperature register output, and VMS alarm dashboards.",
-    featuredImage: "/images/ai/thermal-monitoring.png",
+      "Supports water-cooled high-temperature camera probes, radiometric thermal IP cameras, Modbus TCP temperature register output, OPC-UA, and VMS alarm dashboards.",
+    featuredImage: "/images/ai/furnace-monitoring.png",
     relatedSolutionSlugs: ["electrical-panel-monitoring", "fire-smoke-detection", "chimney-smoke-monitoring"],
     isFeatured: false,
     sortOrder: 17,

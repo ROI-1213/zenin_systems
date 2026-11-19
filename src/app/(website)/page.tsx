@@ -266,7 +266,7 @@ export default async function HomePage() {
                   key={cat.id}
                   className="app-card group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white"
                 >
-                  <div className="relative h-52 w-full overflow-hidden bg-[#0B1730]">
+                  <div className="relative h-60 w-full overflow-hidden bg-[#0B1730] sm:h-64">
                     {cat.coverImage && (
                       <Image
                         src={cat.coverImage}
@@ -276,7 +276,7 @@ export default async function HomePage() {
                         className="cinematic-img object-cover"
                       />
                     )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730] via-[#0B1730]/35 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/60 via-[#0B1730]/20 to-transparent" />
                     <div className="absolute bottom-3.5 left-4 flex h-11 w-11 items-center justify-center rounded-xl border border-white/20 bg-[#1877F2]/90 text-white shadow-lg backdrop-blur-md transition group-hover:scale-105 group-hover:bg-[#00B8D9] group-hover:text-[#0B1730]">
                       <DynamicIcon name={cat.icon} className="h-5 w-5" />
                     </div>
@@ -337,7 +337,7 @@ export default async function HomePage() {
                 key={sol.id}
                 className="glass-panel-dark app-card group flex flex-col overflow-hidden rounded-2xl transition hover:border-[#00B8D9]/60"
               >
-                <div className="relative h-52 w-full overflow-hidden bg-[#081424]">
+                <div className="relative h-60 w-full overflow-hidden bg-[#081424] sm:h-64">
                   {sol.featuredImage && (
                     <Image
                       src={sol.featuredImage}
@@ -347,7 +347,7 @@ export default async function HomePage() {
                       className="cinematic-img object-cover"
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1E3A] via-[#0D1E3A]/25 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0D1E3A]/80 via-[#0D1E3A]/20 to-transparent" />
                   <span className="absolute top-3.5 left-3.5 rounded-full border border-[#00B8D9]/40 bg-[#0B1730]/85 px-3 py-1 text-[11px] font-semibold text-[#00B8D9] backdrop-blur-md">
                     {sol.categoryName}
                   </span>

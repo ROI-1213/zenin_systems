@@ -109,7 +109,7 @@ export function ProductCatalogClient({
               key={product.id}
               className="app-card group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-sm hover:border-[#1877F2] hover:shadow-lg"
             >
-              <div className="relative h-48 w-full overflow-hidden bg-[#0B1730]">
+              <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-[#0B1730]">
                 {product.featuredImage && (
                   <Image
                     src={product.featuredImage}
@@ -119,8 +119,8 @@ export function ProductCatalogClient({
                     className="object-cover transition duration-500 group-hover:scale-105"
                   />
                 )}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/80 via-transparent to-transparent" />
-                <span className="absolute top-3 left-3 rounded-full bg-[#0B1730]/85 px-3 py-1 text-[11px] font-semibold text-[#00B8D9] backdrop-blur-xs">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
+                <span className="absolute top-3 left-3 rounded-full border border-white/10 bg-[#0B1730]/90 px-3 py-1 text-[11px] font-semibold text-[#00B8D9] shadow-sm backdrop-blur-xs">
                   {product.categoryName}
                 </span>
               </div>

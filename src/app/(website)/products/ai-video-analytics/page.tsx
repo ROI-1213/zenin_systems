@@ -176,7 +176,7 @@ export default async function AIVideoAnalyticsHubPage() {
                     key={sol.id}
                     className="app-card group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white hover:border-[#1877F2]"
                   >
-                    <div className="relative h-48 w-full overflow-hidden bg-[#0B1730]">
+                    <div className="relative h-56 w-full overflow-hidden bg-[#0B1730] sm:h-60">
                       {sol.featuredImage && (
                         <Image
                           src={sol.featuredImage}
@@ -186,7 +186,7 @@ export default async function AIVideoAnalyticsHubPage() {
                           className="cinematic-img object-cover"
                         />
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/85 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/35 via-transparent to-transparent" />
                       <span className="absolute bottom-3 left-3 rounded-md border border-white/10 bg-[#0B1730]/90 px-2.5 py-1 text-[11px] font-semibold text-[#00B8D9] backdrop-blur-md">
                         {cat.name}
                       </span>

@@ -154,38 +154,52 @@ export default async function CctvSurveillancePage() {
             {cctvProducts.map((prod) => (
               <article
                 key={prod.id}
-                className="flex flex-col justify-between rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-xs"
+                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white shadow-xs transition hover:border-[#1877F2] hover:shadow-lg"
               >
-                <div>
-                  <span className="rounded-full bg-[#1877F2]/10 px-3 py-1 text-xs font-semibold text-[#1877F2]">
-                    {prod.categoryName}
-                  </span>
-                  <h3 className="mt-3 text-xl font-bold text-[#0B1730]">{prod.name}</h3>
-                  <p className="mt-2 text-sm text-[#64748B]">{prod.shortDescription}</p>
-                  <ul className="mt-4 space-y-2 border-t border-[#E2E8F0] pt-4">
-                    {prod.features.map((f) => (
-                      <li key={f} className="flex items-start gap-2 text-xs text-[#172033]">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#1877F2]" />
-                        <span>{f}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="mt-6 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
-                  <Link
-                    href={`/products/item/${prod.slug}`}
-                    className="text-xs font-bold tracking-wider text-[#1877F2] uppercase hover:underline"
-                  >
-                    View Full Specifications →
-                  </Link>
-                  <QuoteModalTrigger
-                    buttonText="Request Quote"
-                    variant="primary"
-                    size="sm"
-                    productId={prod.id}
-                    productSlug={prod.slug}
-                    preselectedTopicName={prod.name}
-                  />
+                {prod.featuredImage && (
+                  <div className="relative h-56 w-full overflow-hidden bg-[#0B1730] sm:h-64">
+                    <Image
+                      src={prod.featuredImage}
+                      alt={prod.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/40 via-transparent to-transparent" />
+                  </div>
+                )}
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    <span className="rounded-full bg-[#1877F2]/10 px-3 py-1 text-xs font-semibold text-[#1877F2]">
+                      {prod.categoryName}
+                    </span>
+                    <h3 className="mt-3 text-xl font-bold text-[#0B1730]">{prod.name}</h3>
+                    <p className="mt-2 text-sm text-[#64748B]">{prod.shortDescription}</p>
+                    <ul className="mt-4 space-y-2 border-t border-[#E2E8F0] pt-4">
+                      {prod.features.map((f) => (
+                        <li key={f} className="flex items-start gap-2 text-xs text-[#172033]">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[#1877F2]" />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-6 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
+                    <Link
+                      href={`/products/item/${prod.slug}`}
+                      className="text-xs font-bold tracking-wider text-[#1877F2] uppercase hover:underline"
+                    >
+                      View Full Specifications →
+                    </Link>
+                    <QuoteModalTrigger
+                      buttonText="Request Quote"
+                      variant="primary"
+                      size="sm"
+                      productId={prod.id}
+                      productSlug={prod.slug}
+                      preselectedTopicName={prod.name}
+                    />
+                  </div>
                 </div>
               </article>
             ))}
