@@ -261,7 +261,7 @@ export const WIDER_PORTFOLIO_CATEGORIES: SeedProductCategory[] = [
     shortDescription:
       "MRO consumables, industrial safety gear, testing instruments, labeling systems, and specialized technical procurement support.",
     description:
-      "Consolidated B2B supply of indirect plant consumables, maintenance tools, and site support materials to streamline industrial procurement operations.",
+      "Consolidated supply of indirect plant consumables, maintenance tools, and site support materials to streamline industrial procurement operations.",
     icon: "PackageCheck",
     coverImage: "/images/categories/indirect-industrial-materials-and-services.png",
     isCoreSolution: false,
@@ -424,18 +424,19 @@ export const INITIAL_PRODUCTS = [
     sortOrder: 4,
   },
   {
-    name: "Intelligent Gate, Weighbridge & Plant Automation Controller",
+    name: "Intelligent Gate, Weighbridge, Speed Enforcement & Plant Automation Controller",
     slug: "intelligent-gate-weighbridge-automation-controller",
     categorySlug: "intelligent-automation",
     shortDescription:
-      "Integrated hardware-software automation suite linking ANPR cameras, boom barriers, RFID readers, and industrial I/O controllers.",
+      "Integrated hardware-software automation suite linking ANPR & vehicle speed detection cameras, boom barriers, RFID readers, and industrial I/O controllers.",
     description:
-      "Automate industrial vehicle entry, weighbridge positioning, and safety interlocks. This solution synchronizes visual recognition (ANPR and vehicle classification) with physical barrier controls, traffic lights, and enterprise ERP/weighbridge software.",
+      "Automate industrial vehicle entry, internal road speed enforcement, weighbridge positioning, and safety interlocks. This solution synchronizes visual recognition (ANPR, vehicle speed detection, and classification) with physical barrier controls, LED speed displays, traffic lights, and enterprise ERP/weighbridge software.",
     features: [
       "Automated boom barrier and sliding gate actuation on authorized entry",
+      "Real-time ANPR license plate capture paired with vehicle speed detection and overspeed alerts",
       "Unmanned weighbridge vehicle positioning and license plate capture",
-      "Industrial digital I/O integration for safety hooters and interlocks",
-      "Complete audit log with timestamped entry/exit images",
+      "Industrial digital I/O integration for safety hooters, LED speed boards, and interlocks",
+      "Complete audit log with timestamped entry/exit images and speed violation records",
     ],
     applications: [
       "Manufacturing plant logistics gates",
@@ -541,7 +542,7 @@ export const INITIAL_PRODUCTS = [
       "Machine automation and panel upgrades",
     ],
     technicalSpecifications: [
-      { label: "Supply Scope", value: "B2B Project Supply & Custom Panel Assembly" },
+      { label: "Supply Scope", value: "Turnkey Project Supply & Custom Panel Assembly" },
       { label: "Specification Status", value: "Manufactured/supplied per approved BOQ" },
     ],
     integrationCapabilities: [
@@ -1128,36 +1129,40 @@ export const AI_SOLUTIONS_SEED: SeedAISolution[] = [
     sortOrder: 9,
   },
   {
-    name: "ANPR — Automatic Number Plate Recognition",
+    name: "ANPR & Vehicle Speed Detection",
     slug: "anpr",
     categoryCode: "CATEGORY_B",
     shortDescription:
-      "Automated vehicle license plate capture, whitelist/blacklist gate automation, weighbridge integration, and yard turnaround tracking.",
+      "Integrated automatic license plate recognition and real-time vehicle speed detection with whitelist gate automation, radar/video speed enforcement, weighbridge syncing, and yard safety logging.",
     overview:
-      "ANPR (Automatic Number Plate Recognition) automates vehicle identification at industrial gates, weighbridges, and parking barriers. By converting license plate images into searchable text records, facilities can streamline authorized entry and track commercial vehicle turnaround times.",
+      "ANPR & Vehicle Speed Detection provides unified vehicle identification and internal plant speed enforcement across industrial entry gates, weighbridges, internal perimeter roads, and logistics docks. By combining OCR license plate recognition with optical velocity calculation and radar integration, the system verifies vehicle authorization while automatically identifying, snapping, and ticketing overspeeding violations across plant premises.",
     problemStatement:
-      "Manual gate entry logs cause truck queues, transcription errors, and delays at weighbridges and dispatch docks.",
+      "Manual gate logging causes truck queues and weighbridge bottlenecks, while unmonitored overspeeding on internal plant roads and forklift aisles poses critical safety hazards.",
     howItWorks:
-      "Dedicated ANPR or high-shutter IP cameras capture approaching vehicles; optical character recognition (OCR) models extract the registration number, match it against authorized lists or pre-booked gate passes, and trigger barrier actuation.",
+      "Dedicated ANPR and high-shutter speed cameras capture approaching vehicles; AI optical character recognition (OCR) models extract the registration number while calibrated virtual detection lines or Doppler radar units calculate exact transit speed, trigger automatic boom barrier actuation for authorized vehicles, and instantly log overspeeding violation events with synchronized plate snapshots.",
     capabilities: [
-      "High-speed license plate recognition across commercial and private vehicles",
-      "Automated boom barrier trigger for whitelisted vehicles",
-      "Entry-to-exit dwell time and yard turnaround calculation",
-      "Dual-camera capture (license plate + driver/overview snapshot)",
+      "Simultaneous high-accuracy number plate recognition and vehicle transit speed calculation",
+      "Configurable speed threshold alerts (e.g., 15/20/30 km/h) with instant violation snapshots and plate correlation",
+      "Automated boom barrier trigger for authorized whitelisted vehicles and speed-compliant entry",
+      "Integration with roadside dynamic LED speed feedback displays and gate access restriction for repeat violators",
+      "Entry-to-exit turnaround time, average corridor speed calculation, and weighbridge tare syncing",
+      "Dual-camera capture (tight license plate crop + wide contextual scene/driver snapshot)",
     ],
     applicableIndustries: [
       "Manufacturing & Logistics Gates",
+      "Large Industrial Estates & Steel Plants",
       "Weighbridges & Bulk Material Plants",
+      "Ports, Container Terminals & Mining Hubs",
       "Commercial Buildings & Parking Complexes",
-      "Industrial Parks & SEZs",
     ],
     benefits: [
-      "Accelerates gate throughput and reduces truck queueing",
-      "Eliminates manual register manipulation at weighbridges",
-      "Provides complete searchable audit logs of every visiting vehicle",
+      "Enforces plant road speed limits while accelerating gate throughput and reducing bottlenecks",
+      "Correlates overspeeding incidents directly with vehicle registration, driver identity, and transporter records",
+      "Prevents yard pedestrian-forklift accidents through automated detection and digital audit records",
+      "Eliminates manual entry logbooks and unauthorized high-speed maneuvers in restricted plant zones",
     ],
     integrationInfo:
-      "Integrates with boom barriers, UHF RFID readers, weighbridge controllers, and SAP/ERP gate-entry modules.",
+      "Integrates directly with boom barriers, speed radar units, roadside LED driver-feedback displays, UHF RFID readers, weighbridge software, and enterprise ERP/WMS gate-pass modules.",
     featuredImage: "/images/ai/anpr.png",
     relatedSolutionSlugs: ["people-vehicle-counting", "vehicle-speed-detection", "intrusion-detection"],
     isFeatured: true,
@@ -1737,7 +1742,7 @@ export const INITIAL_SERVICES: SeedService[] = [
       "System Maintenance & Administration",
     ],
     applications: [
-      "Corporate customer support and B2B service desks",
+      "Corporate customer support and enterprise service desks",
       "Industrial plant emergency alert broadcasting",
       "Automated visitor and vendor status hotlines",
     ],
@@ -1963,6 +1968,38 @@ export const INITIAL_SERVICES: SeedService[] = [
     isFeatured: false,
     sortOrder: 12,
   },
+  {
+    name: "Customized Fabrication Solutions",
+    slug: "customized-fabrication-solutions",
+    shortDescription:
+      "Custom industrial fabrication of surveillance camera poles, water-cooling protective jackets, explosion-proof housings, equipment skids, and precision mounting brackets.",
+    longDescription:
+      "Zenin Systems delivers bespoke metal fabrication and structural engineering for demanding industrial environments. From heavy-duty CCTV camera poles, high-mast towers, and vibration-damped bracket assemblies to water-cooled protective camera jackets, IP66/IP67 stainless steel enclosures, and modular industrial equipment skids, our custom fabrication solutions ensure structural durability, corrosion resistance, and seamless site integration.",
+    icon: "Wrench",
+    coverImage: "/images/services/customized-fabrication-solutions.png",
+    features: [
+      "Custom CNC fabrication of heavy-duty surveillance poles (4m to 25m) and lowering masts",
+      "Precision SS304/SS316L and mild steel camera mounting brackets with vibration isolation",
+      "Dual-wall water-cooled protective camera jackets and heat shields for furnace and kiln zones",
+      "Weatherproof IP66/IP67/NEMA-4X outdoor equipment enclosures, junction boxes, and rack skids",
+      "Hot-dip galvanizing, electro-polishing, and industrial powder coating for harsh industrial environments",
+    ],
+    capabilities: [
+      "CAD Modeling & Structural FEA Engineering",
+      "Laser Cutting, CNC Bending & Certified TIG/MIG Welding",
+      "Corrosion-Resistant Surface Treatment & Coating",
+      "On-Site Installation, Anchoring & Structural Certification",
+    ],
+    applications: [
+      "High-temperature steel mills, cement kilns, and glass processing plants",
+      "Perimeter surveillance pole lines along refineries, ports, and solar farms",
+      "Custom machine guarding, instrument shelters, and sensor mounting skids",
+    ],
+    industries: ["Manufacturing", "Industrial Plants", "Energy & Utilities", "Infrastructure"],
+    relatedServiceSlugs: ["intelligent-fencing", "access-control-systems", "fire-detection-alarm-systems"],
+    isFeatured: true,
+    sortOrder: 13,
+  },
 ];
 
 export const INITIAL_INDUSTRIES = [
@@ -2069,7 +2106,7 @@ export const INITIAL_PAGE_CONTENTS = [
       highlights: [
         "Industrial CCTV & Network Video Infrastructure",
         "21 Specialized AI Video Analytics Applications",
-        "12 Core Facility & Engineering Service Verticals",
+        "13 Core Facility & Engineering Service Verticals",
         "End-to-End Integration, Commissioning & Support",
       ],
     }),
@@ -2081,7 +2118,7 @@ export const INITIAL_PAGE_CONTENTS = [
     subtitle: "About Zenin Systems",
     content: JSON.stringify({
       introduction:
-        "Zenin Systems Solutions LLP is a specialized B2B technology and engineering solutions provider focused on industrial security, AI video analytics, building management, fire safety, and plant automation infrastructure.",
+        "Zenin Systems Solutions LLP is a specialized industrial technology and engineering solutions provider focused on industrial security, AI video analytics, building management, fire safety, and plant automation infrastructure.",
       secondaryParagraph:
         "We work with industrial plants, manufacturing facilities, logistics hubs, and commercial enterprises to design, supply, integrate, and maintain reliable technology systems tailored to operational and safety requirements.",
       image: "/images/hero/about-engineering.png",
@@ -2150,7 +2187,7 @@ export const INITIAL_PAGE_CONTENTS = [
     subtitle: "ABOUT ZENIN SYSTEMS SOLUTIONS LLP",
     content: JSON.stringify({
       overview:
-        "Zenin Systems Solutions LLP is a B2B industrial technology and engineering solutions company delivering integrated systems across Industrial CCTV Surveillance, AI Video Analytics, Video Management, Intelligent Automation, Fire Safety, Integrated Building Management (IBMS), and Industrial Engineering Supplies.",
+        "Zenin Systems Solutions LLP is an industrial technology and engineering solutions company delivering integrated systems across Industrial CCTV Surveillance, AI Video Analytics, Video Management, Intelligent Automation, Fire Safety, Integrated Building Management (IBMS), and Industrial Engineering Supplies.",
       extendedOverview:
         "Rather than operating as a generic IT hardware reseller, Zenin Systems focuses on complete operational solutions—bridging optical sensors, edge AI computing, electromechanical automation, and facility management systems into dependable enterprise infrastructure. [Editable corporate overview — company history milestones can be updated via Admin CMS]",
       mission:
@@ -2216,7 +2253,7 @@ export const INITIAL_PAGE_CONTENTS = [
         },
         {
           heading: "3. Data Security & Retention",
-          body: "We implement server-side validation, encrypted transport, and role-based access controls to protect submitted B2B enquiry records. We do not sell or rent business contact information to third parties.",
+          body: "We implement server-side validation, encrypted transport, and role-based access controls to protect submitted enquiry records. We do not sell or rent business contact information to third parties.",
         },
       ],
     }),
@@ -2225,13 +2262,13 @@ export const INITIAL_PAGE_CONTENTS = [
     pageKey: "legal",
     sectionKey: "terms_and_conditions",
     title: "Terms and Conditions",
-    subtitle: "WEBSITE USAGE & B2B CATALOG TERMS",
+    subtitle: "WEBSITE USAGE & CATALOG TERMS",
     content: JSON.stringify({
       lastUpdated: "November 2026",
       sections: [
         {
           heading: "1. Informational & Enquiry Scope",
-          body: "The Zenin Systems Solutions LLP website serves as a B2B corporate catalog and project enquiry portal. Product descriptions, AI solution overviews, and service architectures represent engineering capabilities and are customized per project site survey and formal commercial proposal.",
+          body: "The Zenin Systems Solutions LLP website serves as a corporate catalog and project enquiry portal. Product descriptions, AI solution overviews, and service architectures represent engineering capabilities and are customized per project site survey and formal commercial proposal.",
         },
         {
           heading: "2. Technical Specifications & Proposals",

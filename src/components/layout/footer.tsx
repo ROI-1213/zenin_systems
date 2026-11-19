@@ -114,7 +114,7 @@ export async function Footer() {
             <div className="mt-5 space-y-2">
               <div className="flex items-center gap-2 text-xs text-slate-300">
                 <Shield className="h-4 w-4 shrink-0 text-[#00B8D9]" />
-                <span className="font-medium">Registered B2B Systems Integrator</span>
+                <span className="font-medium">Registered Enterprise Systems Integrator</span>
               </div>
               <div className="flex items-center gap-2 text-xs text-slate-300">
                 <CheckCircle2 className="h-4 w-4 shrink-0 text-[#00B8D9]" />
@@ -229,7 +229,7 @@ export async function Footer() {
                   href="/services"
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-[#00B8D9] hover:underline"
                 >
-                  <span>View All 12 Engineering Verticals</span>
+                  <span>View All 13 Engineering Verticals</span>
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </Link>
               </li>

@@ -96,7 +96,7 @@ export default async function ServicesListingPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Service Catalog"
-              title="Our 12 Core Engineering Service Verticals"
+              title="Our 13 Core Engineering Service Verticals"
               description="Select any service domain below to explore technical capabilities, industrial applications, and project enquiry options."
             />
           </Reveal>
@@ -107,7 +107,7 @@ export default async function ServicesListingPage() {
                 key={svc.id}
                 className="app-card group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white hover:border-[#1877F2]"
               >
-                <div className="relative h-52 w-full overflow-hidden bg-[#0B1730]">
+                <div className="relative h-56 w-full overflow-hidden bg-[#0B1730] sm:h-60">
                   {svc.coverImage && (
                     <Image
                       src={svc.coverImage}
@@ -117,7 +117,7 @@ export default async function ServicesListingPage() {
                       className="cinematic-img object-cover"
                     />
                   )}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730] via-[#0B1730]/35 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/55 via-[#0B1730]/15 to-transparent" />
                   <div className="absolute top-3 right-3 rounded-full border border-white/15 bg-[#0B1730]/80 px-2.5 py-1 text-[11px] font-bold text-[#00B8D9] backdrop-blur-md">
                     {String(idx + 1).padStart(2, "0")}
                   </div>

@@ -79,7 +79,7 @@ export default async function AdminDashboardPage() {
     <AdminShell
       user={user}
       title="Enterprise Content & Lead Dashboard"
-      subtitle="Live database metrics across products, AI solutions, engineering services, and B2B enquiries."
+      subtitle="Live database metrics across products, AI solutions, engineering services, and project enquiries."
     >
       {/* KPI WIDGETS */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -152,7 +152,7 @@ export default async function AdminDashboardPage() {
             {[
               { label: "Manage Products", href: "/admin/products" },
               { label: "Manage 21 AI Solutions", href: "/admin/ai-solutions" },
-              { label: "Manage 12 Services", href: "/admin/services" },
+              { label: "Manage 13 Services", href: "/admin/services" },
               { label: "Edit Page Content", href: "/admin/content" },
               { label: "Publish Testimonials", href: "/admin/testimonials" },
               { label: "Update Site Settings", href: "/admin/settings" },

@@ -18,7 +18,7 @@ import { ProductCatalogClient } from "@/components/products/product-catalog-clie
 export const metadata: Metadata = {
   title: "Products & Solutions Catalog — Industrial CCTV, AI Vision & Engineering",
   description:
-    "Explore Zenin Systems' 4 core industrial technology solution groups and 15 wider B2B product & material categories including CCTV, AI Video Analytics, EV Charging, Fire Safety, Access Control, Hydraulics, and Industrial Cables.",
+    "Explore Zenin Systems' 4 core industrial technology solution groups and 15 wider product & material categories including CCTV, AI Video Analytics, EV Charging, Fire Safety, Access Control, Hydraulics, and Industrial Cables.",
 };
 
 export const dynamic = "force-dynamic";
@@ -41,7 +41,7 @@ export default async function ProductsCatalogPage() {
             <Breadcrumbs items={[{ label: "Products & Solutions" }]} light />
             <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
               <Layers className="h-3.5 w-3.5" />
-              <span>B2B Enquiry-Driven Solutions & Material Portfolio</span>
+              <span>Industrial Technology Solutions & Engineering Supplies</span>
             </div>
             <h1 className="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl">
               Industrial Products, AI Vision & Turnkey Technology Solutions
@@ -132,7 +132,7 @@ export default async function ProductsCatalogPage() {
             <SectionHeading
               eyebrow="Configured Systems & Hardware"
               title="Featured Systems & Solution Configurations"
-              description="Filter our representative B2B systems and request a customized quotation matched to your facility requirements."
+              description="Filter our representative industrial systems and request a customized quotation matched to your facility requirements."
             />
           </div>
 
@@ -152,7 +152,7 @@ export default async function ProductsCatalogPage() {
       <section className="bg-white py-16 lg:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Comprehensive B2B Supply & Integration Scope"
+            eyebrow="Comprehensive Supply & Integration Scope"
             title="Wider Industrial Product & Material Portfolio"
             description="Beyond our four core solution hubs, Zenin Systems supplies and integrates a broad spectrum of industrial security, safety, electrical, fluid power, and project fabrication materials."
           />
@@ -208,7 +208,7 @@ export default async function ProductsCatalogPage() {
                       </Link>
                     ) : (
                       <span className="text-[11px] font-medium text-[#64748B]">
-                        B2B Project Supply
+                        Project Supply & Integration
                       </span>
                     )}
                     <QuoteModalTrigger

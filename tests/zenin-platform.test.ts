@@ -52,6 +52,7 @@ const EXPECTED_SERVICE_SLUGS = [
   "access-control-systems",
   "iot-solutions",
   "parking-management",
+  "customized-fabrication-solutions",
 ];
 
 describe("Zenin Systems Solutions LLP — Platform Architecture & QA Suite", () => {

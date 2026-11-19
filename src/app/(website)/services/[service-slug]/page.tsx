@@ -117,7 +117,7 @@ export default async function ServiceDetailPage({
                     className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                   >
                     <ArrowLeft className="h-4 w-4" />
-                    <span>All 12 Services</span>
+                    <span>All 13 Services</span>
                   </Link>
                 </div>
               </div>
@@ -300,7 +300,7 @@ export default async function ServiceDetailPage({
                 href="/services"
                 className="text-xs font-bold text-[#1877F2] uppercase hover:underline"
               >
-                View All 12 Services →
+                View All 13 Services →
               </Link>
             </div>
 

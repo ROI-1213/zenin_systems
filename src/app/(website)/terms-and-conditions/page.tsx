@@ -16,7 +16,7 @@ export default async function TermsAndConditionsPage() {
     sections: [
       {
         heading: "1. Informational & Enquiry Scope",
-        body: "The Zenin Systems Solutions LLP website serves as a B2B corporate catalog and project enquiry portal. Product descriptions, AI solution overviews, and service architectures represent engineering capabilities and are customized per project site survey and formal commercial proposal.",
+        body: "The Zenin Systems Solutions LLP website serves as a corporate catalog and project enquiry portal. Product descriptions, AI solution overviews, and service architectures represent engineering capabilities and are customized per project site survey and formal commercial proposal.",
       },
       {
         heading: "2. Technical Specifications & Proposals",

@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | Zenin Systems Solutions LLP",
   },
   description:
-    "Enterprise B2B industrial security, CCTV surveillance, 21+ AI video analytics applications, video management systems, building automation (IBMS), fire safety, and engineering solutions.",
+    "Enterprise industrial security, CCTV surveillance, 21+ AI video analytics applications, video management systems, building automation (IBMS), fire safety, and engineering solutions.",
   openGraph: {
     type: "website",
     siteName: "Zenin Systems Solutions LLP",

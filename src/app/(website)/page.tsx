@@ -57,13 +57,13 @@ export default async function HomePage() {
       highlights: [
         "Industrial CCTV & Network Video Infrastructure",
         "21 Specialized AI Video Analytics Applications",
-        "12 Core Facility & Engineering Service Verticals",
+        "13 Core Facility & Engineering Service Verticals",
         "End-to-End Integration, Commissioning & Support",
       ],
     }),
     getPageContentBlock("home", "about_preview", {
       introduction:
-        "Zenin Systems Solutions LLP is a specialized B2B technology and engineering solutions provider focused on industrial security, AI video analytics, building management, fire safety, and plant automation infrastructure.",
+        "Zenin Systems Solutions LLP is a specialized industrial technology and engineering solutions provider focused on industrial security, AI video analytics, building management, fire safety, and plant automation infrastructure.",
       secondaryParagraph:
         "We work with industrial plants, manufacturing facilities, logistics hubs, and commercial enterprises to design, supply, integrate, and maintain reliable technology systems tailored to operational and safety requirements.",
       image: "/images/hero/about-engineering.png",
@@ -179,8 +179,8 @@ export default async function HomePage() {
                       <ShieldCheck className="h-5 w-5" />
                     </div>
                     <p className="text-xs leading-relaxed text-slate-300">
-                      Unified B2B architecture spanning Industrial Surveillance, AI
-                      Computer Vision, Building Management, and Plant Engineering.
+                      Unified engineering architecture spanning Industrial Surveillance, AI
+                      Computer Vision, Building Management, and Plant Systems.
                     </p>
                   </div>
                 </div>
@@ -400,7 +400,7 @@ export default async function HomePage() {
               className="touch-btn inline-flex min-h-[48px] w-full shrink-0 items-center justify-center gap-2 rounded-xl bg-[#0B1730] px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#1877F2] md:w-auto"
             >
               <Wrench className="h-4 w-4 shrink-0" />
-              <span>View All 12 Services</span>
+              <span>View All 13 Services</span>
               <ArrowRight className="h-4 w-4 shrink-0" />
             </Link>
           </Reveal>

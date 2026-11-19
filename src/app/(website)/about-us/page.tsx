@@ -32,7 +32,7 @@ export default async function AboutUsPage() {
     await Promise.all([
       getPageContentBlock("about", "corporate_profile", {
         overview:
-          "Zenin Systems Solutions LLP is a B2B industrial technology and engineering solutions company delivering integrated systems across Industrial CCTV Surveillance, AI Video Analytics, Video Management, Intelligent Automation, Fire Safety, Integrated Building Management (IBMS), and Industrial Engineering Supplies.",
+          "Zenin Systems Solutions LLP is an industrial technology and engineering solutions company delivering integrated systems across Industrial CCTV Surveillance, AI Video Analytics, Video Management, Intelligent Automation, Fire Safety, Integrated Building Management (IBMS), and Industrial Engineering Supplies.",
         extendedOverview:
           "Rather than operating as a generic IT hardware reseller, Zenin Systems focuses on complete operational solutions—bridging optical sensors, edge AI computing, electromechanical automation, and facility management systems into dependable enterprise infrastructure.",
         mission:

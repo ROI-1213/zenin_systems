@@ -385,7 +385,7 @@ export function HeaderClient({
                   href="/services"
                   className="inline-flex items-center gap-1 rounded-lg bg-[#0B1730] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#1877F2]"
                 >
-                  <span>View All 12 Services</span>
+                  <span>View All 13 Services</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </Link>
               </div>

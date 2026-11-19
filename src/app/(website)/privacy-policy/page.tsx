@@ -5,7 +5,7 @@ import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "Privacy Policy and B2B data handling practices of Zenin Systems Solutions LLP.",
+  description: "Privacy Policy and data handling practices of Zenin Systems Solutions LLP.",
 };
 
 export const dynamic = "force-dynamic";
@@ -24,7 +24,7 @@ export default async function PrivacyPolicyPage() {
       },
       {
         heading: "3. Data Security & Retention",
-        body: "We implement server-side validation, encrypted transport, and role-based access controls to protect submitted B2B enquiry records. We do not sell or rent business contact information to third parties.",
+        body: "We implement server-side validation, encrypted transport, and role-based access controls to protect submitted enquiry records. We do not sell or rent business contact information to third parties.",
       },
     ],
   });

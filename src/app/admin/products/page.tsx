@@ -17,7 +17,7 @@ export default async function AdminProductsPage() {
     <AdminShell
       user={user}
       title="Product & System Catalog Management"
-      subtitle="Create, edit, publish, unpublish, and manage technical specifications for B2B products."
+      subtitle="Create, edit, publish, unpublish, and manage technical specifications for industrial products."
     >
       <ProductsManager
         initialProducts={products}

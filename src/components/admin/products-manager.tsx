@@ -268,7 +268,7 @@ export function ProductsManager({
           <div className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-2xl sm:p-8">
             <div className="mb-5 flex items-center justify-between border-b border-[#E2E8F0] pb-4">
               <h2 className="text-lg font-bold text-[#0B1730]">
-                {isNew ? "Create New B2B Product" : `Edit Product — ${editing?.name}`}
+                {isNew ? "Create New Product" : `Edit Product — ${editing?.name}`}
               </h2>
               <button
                 type="button"

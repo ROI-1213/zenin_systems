@@ -194,7 +194,7 @@ export default async function IntelligentAutomationPage() {
               href="/services"
               className="text-xs font-bold text-[#1877F2] uppercase hover:underline"
             >
-              View All 12 Services →
+              View All 13 Services →
             </Link>
           </div>
           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

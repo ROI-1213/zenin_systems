@@ -386,7 +386,7 @@ export function EnquiryForm({
           }`}
         >
           <ShieldCheck className="h-4 w-4 shrink-0 text-[#00B8D9]" />
-          <span>Protected B2B enquiry • Direct engineering desk routing</span>
+          <span>Protected enquiry • Direct engineering desk routing</span>
         </div>
 
         <button

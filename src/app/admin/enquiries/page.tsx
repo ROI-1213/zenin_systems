@@ -48,7 +48,7 @@ export default async function AdminEnquiriesPage() {
     <AdminShell
       user={user}
       title="Enquiry & Lead Management"
-      subtitle="View, filter, update status, add internal notes, and export B2B enquiries."
+      subtitle="View, filter, update status, add internal notes, and export project enquiries."
     >
       <EnquiriesManager initialEnquiries={serialized} />
     </AdminShell>

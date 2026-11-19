@@ -51,7 +51,7 @@ export function ProductCatalogClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search products, systems, or specifications..."
-            aria-label="Search B2B product catalog"
+            aria-label="Search product catalog"
             className="min-h-[48px] w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] py-2.5 pr-4 pl-10 text-base text-[#172033] transition focus:border-[#1877F2] focus:bg-white focus:outline-none sm:text-sm"
           />
         </div>
