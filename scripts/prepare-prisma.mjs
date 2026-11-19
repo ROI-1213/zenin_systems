@@ -1,5 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
+import { loadEnvFiles } from "./load-env.mjs";
+
+loadEnvFiles();
 
 const schemaPath = path.join(process.cwd(), "prisma", "schema.prisma");
 const dbUrl = process.env.DATABASE_URL || "";
