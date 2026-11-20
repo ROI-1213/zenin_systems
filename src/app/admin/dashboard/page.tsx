@@ -151,10 +151,10 @@ export default async function AdminDashboardPage() {
           <div className="mt-4 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
             {[
               { label: "Edit Home Page", href: "/admin/home-page" },
+              { label: "Edit About Us Page", href: "/admin/about-us" },
               { label: "Manage Products", href: "/admin/products" },
               { label: "Manage 21 AI Solutions", href: "/admin/ai-solutions" },
               { label: "Manage 13 Services", href: "/admin/services" },
-              { label: "Edit Page Content", href: "/admin/content" },
               { label: "Update Site Settings", href: "/admin/settings" },
             ].map((act) => (
               <Link

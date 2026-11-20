@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
   Home,
+  Building2,
   Package,
   Layers,
   Sparkles,
@@ -31,6 +32,7 @@ import { logoutAdminAction } from "@/lib/actions/admin-actions";
 const NAV_ITEMS = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Home Page Editor", href: "/admin/home-page", icon: Home },
+  { label: "About Us Editor", href: "/admin/about-us", icon: Building2 },
   { label: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Product Categories", href: "/admin/categories", icon: Layers },
