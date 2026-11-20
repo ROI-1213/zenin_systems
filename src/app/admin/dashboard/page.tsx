@@ -153,8 +153,8 @@ export default async function AdminDashboardPage() {
               { label: "Edit Home Page", href: "/admin/home-page" },
               { label: "Edit About Us Page", href: "/admin/about-us" },
               { label: "Edit Products Page", href: "/admin/products-page" },
+              { label: "Edit Services Page", href: "/admin/services-page" },
               { label: "Manage Products", href: "/admin/products" },
-              { label: "Manage 21 AI Solutions", href: "/admin/ai-solutions" },
               { label: "Manage 13 Services", href: "/admin/services" },
             ].map((act) => (
               <Link

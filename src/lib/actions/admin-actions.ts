@@ -892,6 +892,7 @@ export async function savePageContentAction(input: {
     "/products/ai-video-analytics",
     "/products/video-management",
     "/products/intelligent-automation",
+    "/services",
     "/contact-us",
     "/privacy-policy",
     "/terms-and-conditions",
@@ -899,6 +900,7 @@ export async function savePageContentAction(input: {
     "/admin/home-page",
     "/admin/about-us",
     "/admin/products-page",
+    "/admin/services-page",
   ]);
   return { success: true, block: updated };
 }

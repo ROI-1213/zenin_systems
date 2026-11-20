@@ -11,7 +11,8 @@ import {
   ArrowRight,
   ArrowLeft,
 } from "lucide-react";
-import { getServiceBySlug, getServices } from "@/lib/db/queries";
+import { getPageContentBlock, getServiceBySlug, getServices } from "@/lib/db/queries";
+import { SERVICES_PAGE_DEFAULTS } from "@/lib/services-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { DynamicIcon } from "@/components/ui/dynamic-icon";
 import { QuoteModalTrigger } from "@/components/forms/quote-modal";
@@ -46,7 +47,17 @@ export default async function ServiceDetailPage({
     notFound();
   }
 
-  const allServices = await getServices();
+  const [allServices, labelsBlock] = await Promise.all([
+    getServices(),
+    getPageContentBlock(
+      "services",
+      "detail_labels",
+      SERVICES_PAGE_DEFAULTS.detail_labels.data
+    ),
+  ]);
+  const LD = SERVICES_PAGE_DEFAULTS.detail_labels.data;
+  const L = labelsBlock.data;
+  const label = (key: keyof typeof LD) => String(L[key] || LD[key]);
   const relatedServices = allServices
     .filter(
       (s) =>
@@ -92,7 +103,7 @@ export default async function ServiceDetailPage({
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
                   <DynamicIcon name={service.icon} className="h-3.5 w-3.5" />
-                  <span>Turnkey Engineering Service</span>
+                  <span>{label("bannerBadge")}</span>
                 </div>
 
                 <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
@@ -105,7 +116,7 @@ export default async function ServiceDetailPage({
 
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <QuoteModalTrigger
-                    buttonText={`Request Quote — ${service.name}`}
+                    buttonText={`${label("quoteButtonPrefix")} ${service.name}`}
                     variant="cyan"
                     size="lg"
                     serviceId={service.id}
@@ -117,7 +128,7 @@ export default async function ServiceDetailPage({
                     className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
                   >
                     <ArrowLeft className="h-4 w-4" />
-                    <span>All 13 Services</span>
+                    <span>{label("backButtonText")}</span>
                   </Link>
                 </div>
               </div>
@@ -149,10 +160,10 @@ export default async function ServiceDetailPage({
             <div className="space-y-10 lg:col-span-7">
               <div>
                 <span className="text-xs font-bold tracking-wider text-[#1877F2] uppercase">
-                  Service Overview
+                  {label("overviewEyebrow")}
                 </span>
                 <h2 className="mt-1 text-2xl font-bold text-[#0B1730]">
-                  Engineering Scope & Architecture
+                  {label("overviewTitle")}
                 </h2>
                 <p className="mt-3 text-base leading-relaxed text-[#64748B]">
                   {service.longDescription}
@@ -161,7 +172,7 @@ export default async function ServiceDetailPage({
 
               {service.features.length > 0 && (
                 <div>
-                  <h3 className="text-xl font-bold text-[#0B1730]">Key Features</h3>
+                  <h3 className="text-xl font-bold text-[#0B1730]">{label("featuresTitle")}</h3>
                   <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                     {service.features.map((feat) => (
                       <div
@@ -181,7 +192,7 @@ export default async function ServiceDetailPage({
               {/* CAPABILITIES + CROSS-SERVICE LIFECYCLE */}
               <div>
                 <h3 className="text-xl font-bold text-[#0B1730]">
-                  Delivery & Integration Capabilities
+                  {label("capabilitiesTitle")}
                 </h3>
                 <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
                   {(service.capabilities.length > 0
@@ -205,6 +216,7 @@ export default async function ServiceDetailPage({
                 </div>
 
                 {/* Cross-service lifecycle badges */}
+                {L.showLifecycleBadges !== false && (
                 <div className="mt-4 flex flex-wrap gap-2">
                   {[
                     "System Integration",
@@ -221,6 +233,7 @@ export default async function ServiceDetailPage({
                     </span>
                   ))}
                 </div>
+                )}
               </div>
 
               {/* APPLICATIONS & INDUSTRIES SERVED */}
@@ -229,7 +242,7 @@ export default async function ServiceDetailPage({
                   <div className="rounded-2xl border border-[#E2E8F0] p-6">
                     <div className="flex items-center gap-2 text-[#0B1730]">
                       <Layers className="h-5 w-5 text-[#1877F2]" />
-                      <h3 className="text-base font-bold">Typical Applications</h3>
+                      <h3 className="text-base font-bold">{label("applicationsTitle")}</h3>
                     </div>
                     <ul className="mt-4 space-y-2 text-sm text-[#64748B]">
                       {service.applications.map((app) => (
@@ -246,7 +259,7 @@ export default async function ServiceDetailPage({
                   <div className="rounded-2xl border border-[#E2E8F0] p-6">
                     <div className="flex items-center gap-2 text-[#0B1730]">
                       <Factory className="h-5 w-5 text-[#0095B0]" />
-                      <h3 className="text-base font-bold">Industries Served</h3>
+                      <h3 className="text-base font-bold">{label("industriesTitle")}</h3>
                     </div>
                     <ul className="mt-4 space-y-2 text-sm text-[#64748B]">
                       {service.industries.map((ind) => (
@@ -265,13 +278,13 @@ export default async function ServiceDetailPage({
             <div className="lg:col-span-5">
               <div className="sticky top-28 rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC] p-6 shadow-lg sm:p-7">
                 <span className="text-[11px] font-bold tracking-wider text-[#1877F2] uppercase">
-                  Direct Service Attribution
+                  {label("quoteEyebrow")}
                 </span>
                 <h2 className="mt-1 text-xl font-bold text-[#0B1730]">
-                  Request a Proposal for {service.name}
+                  {label("quoteTitlePrefix")} {service.name}
                 </h2>
                 <p className="mt-1 mb-5 text-xs text-[#64748B]">
-                  Your request is automatically linked to{" "}
+                  {label("quoteNote")}{" "}
                   <strong className="text-[#0B1730]">{service.name}</strong>.
                 </p>
 
@@ -294,13 +307,13 @@ export default async function ServiceDetailPage({
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
               <h2 className="text-2xl font-bold text-[#0B1730]">
-                Related Engineering Services
+                {label("relatedTitle")}
               </h2>
               <Link
                 href="/services"
                 className="text-xs font-bold text-[#1877F2] uppercase hover:underline"
               >
-                View All 13 Services →
+                {label("relatedLinkText")}
               </Link>
             </div>
 

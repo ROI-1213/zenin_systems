@@ -35,6 +35,7 @@ const NAV_ITEMS = [
   { label: "Home Page Editor", href: "/admin/home-page", icon: Home },
   { label: "About Us Editor", href: "/admin/about-us", icon: Building2 },
   { label: "Products Page Editor", href: "/admin/products-page", icon: Sliders },
+  { label: "Services Page Editor", href: "/admin/services-page", icon: Wrench },
   { label: "Enquiries & Leads", href: "/admin/enquiries", icon: Inbox },
   { label: "Products", href: "/admin/products", icon: Package },
   { label: "Product Categories", href: "/admin/categories", icon: Layers },
