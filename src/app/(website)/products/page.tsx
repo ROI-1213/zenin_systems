@@ -6,9 +6,11 @@ import { ArrowRight, Layers, PackageCheck } from "lucide-react";
 import {
   getAllProductCategories,
   getCoreSolutionCategories,
+  getPageContentBlock,
   getProducts,
   getWiderPortfolioCategories,
 } from "@/lib/db/queries";
+import { PRODUCTS_PAGE_DEFAULTS } from "@/lib/products-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { DynamicIcon } from "@/components/ui/dynamic-icon";
@@ -18,212 +20,279 @@ import { ProductCatalogClient } from "@/components/products/product-catalog-clie
 export const metadata: Metadata = {
   title: "Products & Solutions Catalog — Industrial CCTV, AI Vision & Engineering",
   description:
-    "Explore Zenin Systems' 4 core industrial technology solution groups and 15 wider product & material categories including CCTV, AI Video Analytics, EV Charging, Fire Safety, Access Control, Hydraulics, and Industrial Cables.",
+    "Explore Zenin Systems' 4 core industrial technology solution groups and 16 wider product & material categories including CCTV, AI Video Analytics, EV Charging, Fire Safety, Access Control, Hydraulics, Valves & Pumps, and Industrial Cables.",
 };
 
 export const dynamic = "force-dynamic";
 
 export default async function ProductsCatalogPage() {
-  const [coreCategories, widerCategories, allCategories, products] =
-    await Promise.all([
-      getCoreSolutionCategories(),
-      getWiderPortfolioCategories(),
-      getAllProductCategories(false),
-      getProducts(),
-    ]);
+  const [
+    bannerBlock,
+    coreGroupsBlock,
+    featuredSystemsBlock,
+    widerPortfolioBlock,
+    coreCategories,
+    widerCategories,
+    allCategories,
+    products,
+  ] = await Promise.all([
+    getPageContentBlock("products", "banner", PRODUCTS_PAGE_DEFAULTS.banner.data),
+    getPageContentBlock(
+      "products",
+      "core_groups",
+      PRODUCTS_PAGE_DEFAULTS.core_groups.data
+    ),
+    getPageContentBlock(
+      "products",
+      "featured_systems",
+      PRODUCTS_PAGE_DEFAULTS.featured_systems.data
+    ),
+    getPageContentBlock(
+      "products",
+      "wider_portfolio",
+      PRODUCTS_PAGE_DEFAULTS.wider_portfolio.data
+    ),
+    getCoreSolutionCategories(),
+    getWiderPortfolioCategories(),
+    getAllProductCategories(false),
+    getProducts(),
+  ]);
 
   return (
     <div>
-      {/* HERO BANNER */}
-      <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
-        <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
-          <div className="px-5 sm:px-8 lg:px-12">
-            <Breadcrumbs items={[{ label: "Products & Solutions" }]} light />
-            <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
-              <Layers className="h-3.5 w-3.5" />
-              <span>Industrial Technology Solutions & Engineering Supplies</span>
+      {/* 01. HERO BANNER */}
+      {bannerBlock.data.enabled !== false && (
+        <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
+          <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
+            <div className="px-5 sm:px-8 lg:px-12">
+              <Breadcrumbs items={[{ label: "Products & Solutions" }]} light />
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
+                <Layers className="h-3.5 w-3.5" />
+                <span>
+                  {bannerBlock.subtitle || PRODUCTS_PAGE_DEFAULTS.banner.subtitle}
+                </span>
+              </div>
+              <h1 className="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl">
+                {bannerBlock.title || PRODUCTS_PAGE_DEFAULTS.banner.title}
+              </h1>
+              <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
+                {bannerBlock.data.description}
+              </p>
             </div>
-            <h1 className="mt-4 max-w-4xl text-3xl font-extrabold tracking-tight sm:text-5xl">
-              Industrial Products, AI Vision & Turnkey Technology Solutions
-            </h1>
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-              Our catalog spans four flagship engineering solution suites alongside a
-              comprehensive portfolio of industrial surveillance, safety, electrical,
-              automation, and infrastructure hardware.
-            </p>
+          </section>
+        </div>
+      )}
+
+      {/* 02. LAYER 1: 4 CORE SOLUTION GROUPS */}
+      {coreGroupsBlock.data.enabled !== false && (
+        <section className="bg-white py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow={
+                coreGroupsBlock.subtitle ||
+                PRODUCTS_PAGE_DEFAULTS.core_groups.subtitle
+              }
+              title={
+                coreGroupsBlock.title || PRODUCTS_PAGE_DEFAULTS.core_groups.title
+              }
+              description={coreGroupsBlock.data.description}
+            />
+
+            <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
+              {coreCategories.map((cat) => {
+                const href = cat.dedicatedRoute || `/products#${cat.slug}`;
+                return (
+                  <article
+                    key={cat.id}
+                    id={cat.slug}
+                    className="group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/60 shadow-2xs transition hover:border-[#1877F2] hover:bg-white hover:shadow-xl sm:flex-row"
+                  >
+                    <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#0B1730] sm:h-auto sm:w-64 lg:w-72">
+                      {cat.coverImage && (
+                        <Image
+                          src={cat.coverImage}
+                          alt={cat.name}
+                          fill
+                          sizes="(max-width: 640px) 100vw, 288px"
+                          className="object-cover transition duration-500 group-hover:scale-105"
+                        />
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1877F2] text-white">
+                        <DynamicIcon name={cat.icon} className="h-5 w-5" />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-1 flex-col justify-between p-6">
+                      <div>
+                        <span className="text-[11px] font-bold tracking-wider text-[#1877F2] uppercase">
+                          Core Solution Pillar
+                        </span>
+                        <h2 className="mt-1 text-xl font-bold text-[#0B1730] group-hover:text-[#1877F2]">
+                          {cat.name}
+                        </h2>
+                        <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:text-sm">
+                          {cat.shortDescription}
+                        </p>
+                      </div>
+
+                      <div className="mt-5 flex items-center justify-between gap-3 border-t border-[#E2E8F0] pt-4">
+                        <Link
+                          href={href}
+                          className="touch-btn inline-flex min-h-[48px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-white px-3.5 py-2.5 text-xs font-bold tracking-wider text-[#1877F2] uppercase shadow-2xs transition hover:bg-[#1877F2] hover:text-white"
+                        >
+                          <span>
+                            {coreGroupsBlock.data.exploreButtonText ||
+                              PRODUCTS_PAGE_DEFAULTS.core_groups.data
+                                .exploreButtonText}
+                          </span>
+                          <ArrowRight className="h-4 w-4 shrink-0" />
+                        </Link>
+                        <QuoteModalTrigger
+                          buttonText={
+                            coreGroupsBlock.data.enquireButtonText ||
+                            PRODUCTS_PAGE_DEFAULTS.core_groups.data
+                              .enquireButtonText
+                          }
+                          variant="outline"
+                          size="sm"
+                          preselectedTopicName={cat.name}
+                        />
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </div>
         </section>
-      </div>
+      )}
 
-      {/* LAYER 1: 4 CORE SOLUTION GROUPS */}
-      <section className="bg-white py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Primary Solution Pillars"
-            title="Four Core Solution Groups"
-            description="Dedicated engineering architectures for industrial video surveillance, AI computer vision, centralized video management, and intelligent plant automation."
-          />
+      {/* 03. INTERACTIVE PRODUCT & SOLUTION EXPLORER */}
+      {featuredSystemsBlock.data.enabled !== false && (
+        <section className="border-y border-[#E2E8F0] bg-[#F5F8FC] py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-10">
+              <SectionHeading
+                eyebrow={
+                  featuredSystemsBlock.subtitle ||
+                  PRODUCTS_PAGE_DEFAULTS.featured_systems.subtitle
+                }
+                title={
+                  featuredSystemsBlock.title ||
+                  PRODUCTS_PAGE_DEFAULTS.featured_systems.title
+                }
+                description={featuredSystemsBlock.data.description}
+              />
+            </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-            {coreCategories.map((cat) => {
-              const href = cat.dedicatedRoute || `/products#${cat.slug}`;
-              return (
-                <article
+            <ProductCatalogClient
+              products={products}
+              categories={allCategories.map((c) => ({
+                id: c.id,
+                name: c.name,
+                slug: c.slug,
+                isCoreSolution: c.isCoreSolution,
+              }))}
+            />
+          </div>
+        </section>
+      )}
+
+      {/* 04. LAYER 2: WIDER PRODUCT & MATERIAL PORTFOLIO */}
+      {widerPortfolioBlock.data.enabled !== false && (
+        <section className="bg-white py-16 lg:py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow={
+                widerPortfolioBlock.subtitle ||
+                PRODUCTS_PAGE_DEFAULTS.wider_portfolio.subtitle
+              }
+              title={
+                widerPortfolioBlock.title ||
+                PRODUCTS_PAGE_DEFAULTS.wider_portfolio.title
+              }
+              description={widerPortfolioBlock.data.description}
+            />
+
+            <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {widerCategories.map((cat) => (
+                <div
                   key={cat.id}
                   id={cat.slug}
-                  className="group flex flex-col overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/60 shadow-2xs transition hover:border-[#1877F2] hover:bg-white hover:shadow-xl sm:flex-row"
+                  className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/50 transition hover:border-[#1877F2] hover:bg-white hover:shadow-lg"
                 >
-                  <div className="relative h-56 w-full shrink-0 overflow-hidden bg-[#0B1730] sm:h-auto sm:w-64 lg:w-72">
-                    {cat.coverImage && (
+                  {cat.coverImage && (
+                    <div className="relative h-44 w-full overflow-hidden bg-[#0B1730]">
                       <Image
                         src={cat.coverImage}
                         alt={cat.name}
                         fill
-                        sizes="(max-width: 640px) 100vw, 288px"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         className="object-cover transition duration-500 group-hover:scale-105"
                       />
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 flex h-10 w-10 items-center justify-center rounded-xl bg-[#1877F2] text-white">
-                      <DynamicIcon name={cat.icon} className="h-5 w-5" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
+                      <div className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0B1730]/90 text-[#00B8D9] backdrop-blur-xs">
+                        <DynamicIcon name={cat.icon} className="h-4 w-4" />
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex flex-1 flex-col justify-between p-6">
                     <div>
-                      <span className="text-[11px] font-bold tracking-wider text-[#1877F2] uppercase">
-                        Core Solution Pillar
-                      </span>
-                      <h2 className="mt-1 text-xl font-bold text-[#0B1730] group-hover:text-[#1877F2]">
+                      {!cat.coverImage && (
+                        <div className="flex items-center justify-between">
+                          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0B1730] text-[#00B8D9]">
+                            <DynamicIcon name={cat.icon} className="h-5 w-5" />
+                          </div>
+                          <PackageCheck className="h-4 w-4 text-slate-400" />
+                        </div>
+                      )}
+                      <h3
+                        className={`${
+                          cat.coverImage ? "" : "mt-4"
+                        } text-base font-bold text-[#0B1730]`}
+                      >
                         {cat.name}
-                      </h2>
+                      </h3>
                       <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:text-sm">
                         {cat.shortDescription}
                       </p>
                     </div>
 
-                    <div className="mt-5 flex items-center justify-between gap-3 border-t border-[#E2E8F0] pt-4">
-                      <Link
-                        href={href}
-                        className="touch-btn inline-flex min-h-[48px] flex-1 items-center justify-center gap-1.5 rounded-xl bg-white px-3.5 py-2.5 text-xs font-bold tracking-wider text-[#1877F2] uppercase shadow-2xs transition hover:bg-[#1877F2] hover:text-white"
-                      >
-                        <span>Explore Hub</span>
-                        <ArrowRight className="h-4 w-4 shrink-0" />
-                      </Link>
+                    <div className="mt-5 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
+                      {cat.dedicatedRoute ? (
+                        <Link
+                          href={cat.dedicatedRoute}
+                          className="text-xs font-bold text-[#1877F2] hover:underline"
+                        >
+                          View Solution Page →
+                        </Link>
+                      ) : (
+                        <span className="text-[11px] font-medium text-[#64748B]">
+                          {widerPortfolioBlock.data.defaultLabel ||
+                            PRODUCTS_PAGE_DEFAULTS.wider_portfolio.data
+                              .defaultLabel}
+                        </span>
+                      )}
                       <QuoteModalTrigger
-                        buttonText="Enquire"
+                        buttonText={
+                          widerPortfolioBlock.data.quoteButtonText ||
+                          PRODUCTS_PAGE_DEFAULTS.wider_portfolio.data
+                            .quoteButtonText
+                        }
                         variant="outline"
                         size="sm"
                         preselectedTopicName={cat.name}
                       />
                     </div>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* INTERACTIVE PRODUCT & SOLUTION EXPLORER */}
-      <section className="border-y border-[#E2E8F0] bg-[#F5F8FC] py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-10">
-            <SectionHeading
-              eyebrow="Configured Systems & Hardware"
-              title="Featured Systems & Solution Configurations"
-              description="Filter our representative industrial systems and request a customized quotation matched to your facility requirements."
-            />
-          </div>
-
-          <ProductCatalogClient
-            products={products}
-            categories={allCategories.map((c) => ({
-              id: c.id,
-              name: c.name,
-              slug: c.slug,
-              isCoreSolution: c.isCoreSolution,
-            }))}
-          />
-        </div>
-      </section>
-
-      {/* LAYER 2: WIDER PRODUCT & MATERIAL PORTFOLIO (15 FAMILIES) */}
-      <section className="bg-white py-16 lg:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Comprehensive Supply & Integration Scope"
-            title="Wider Industrial Product & Material Portfolio"
-            description="Beyond our four core solution hubs, Zenin Systems supplies and integrates a broad spectrum of industrial security, safety, electrical, fluid power, and project fabrication materials."
-          />
-
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {widerCategories.map((cat) => (
-              <div
-                key={cat.id}
-                id={cat.slug}
-                className="group flex flex-col justify-between overflow-hidden rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC]/50 transition hover:border-[#1877F2] hover:bg-white hover:shadow-lg"
-              >
-                {cat.coverImage && (
-                  <div className="relative h-44 w-full overflow-hidden bg-[#0B1730]">
-                    <Image
-                      src={cat.coverImage}
-                      alt={cat.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1730]/45 via-transparent to-transparent" />
-                    <div className="absolute bottom-3 left-3 flex h-9 w-9 items-center justify-center rounded-lg bg-[#0B1730]/90 text-[#00B8D9] backdrop-blur-xs">
-                      <DynamicIcon name={cat.icon} className="h-4 w-4" />
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex flex-1 flex-col justify-between p-6">
-                  <div>
-                    {!cat.coverImage && (
-                      <div className="flex items-center justify-between">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#0B1730] text-[#00B8D9]">
-                          <DynamicIcon name={cat.icon} className="h-5 w-5" />
-                        </div>
-                        <PackageCheck className="h-4 w-4 text-slate-400" />
-                      </div>
-                    )}
-                    <h3 className={`${cat.coverImage ? "" : "mt-4"} text-base font-bold text-[#0B1730]`}>
-                      {cat.name}
-                    </h3>
-                    <p className="mt-2 text-xs leading-relaxed text-[#64748B] sm:text-sm">
-                      {cat.shortDescription}
-                    </p>
-                  </div>
-
-                  <div className="mt-5 flex items-center justify-between border-t border-[#E2E8F0] pt-4">
-                    {cat.dedicatedRoute ? (
-                      <Link
-                        href={cat.dedicatedRoute}
-                        className="text-xs font-bold text-[#1877F2] hover:underline"
-                      >
-                        View Solution Page →
-                      </Link>
-                    ) : (
-                      <span className="text-[11px] font-medium text-[#64748B]">
-                        Project Supply & Integration
-                      </span>
-                    )}
-                    <QuoteModalTrigger
-                      buttonText="Request BOQ Quote"
-                      variant="outline"
-                      size="sm"
-                      preselectedTopicName={cat.name}
-                    />
-                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }

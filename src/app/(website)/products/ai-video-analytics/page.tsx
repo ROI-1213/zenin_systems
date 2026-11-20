@@ -10,7 +10,8 @@ import {
   Layers,
   CheckCircle2,
 } from "lucide-react";
-import { getAICategoriesWithSolutions } from "@/lib/db/queries";
+import { getAICategoriesWithSolutions, getPageContentBlock } from "@/lib/db/queries";
+import { PRODUCTS_PAGE_DEFAULTS } from "@/lib/products-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { DynamicIcon } from "@/components/ui/dynamic-icon";
@@ -27,7 +28,10 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function AIVideoAnalyticsHubPage() {
-  const aiCategories = await getAICategoriesWithSolutions(false);
+  const [hubBlock, aiCategories] = await Promise.all([
+    getPageContentBlock("products", "ai_hub", PRODUCTS_PAGE_DEFAULTS.ai_hub.data),
+    getAICategoriesWithSolutions(false),
+  ]);
   const totalSolutionsCount = aiCategories.reduce(
     (acc, cat) => acc + cat.solutions.length,
     0
@@ -36,6 +40,7 @@ export default async function AIVideoAnalyticsHubPage() {
   return (
     <div>
       {/* 1. AI-FOCUSED HERO */}
+      {hubBlock.data.enabled !== false && (
       <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
         <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
           <div className="px-5 sm:px-8 lg:px-12">
@@ -52,23 +57,20 @@ export default async function AIVideoAnalyticsHubPage() {
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-4 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
                   <Sparkles className="h-3.5 w-3.5" />
                   <span>
-                    5 Application Domains • {totalSolutionsCount} Specialized AI Vision
-                    Solutions
+                    {hubBlock.subtitle ||
+                      `5 Application Domains • ${totalSolutionsCount} Specialized AI Vision Solutions`}
                   </span>
                 </div>
                 <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                  AI Video Analytics & Industrial Computer Vision Suite
+                  {hubBlock.title || PRODUCTS_PAGE_DEFAULTS.ai_hub.title}
                 </h1>
                 <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-300 sm:text-lg">
-                  Convert passive industrial CCTV cameras and production-line optical
-                  sensors into real-time operational intelligence. Detect safety
-                  violations, secure facility perimeters, inspect surface quality, and
-                  monitor thermal anomalies automatically.
+                  {hubBlock.data.description}
                 </p>
 
                 <div className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
                   <QuoteModalTrigger
-                    buttonText="Request AI Vision Demo & Quote"
+                    buttonText={hubBlock.data.primaryCtaText || PRODUCTS_PAGE_DEFAULTS.ai_hub.data.primaryCtaText}
                     variant="cyan"
                     size="lg"
                     className="w-full sm:w-auto"
@@ -113,6 +115,7 @@ export default async function AIVideoAnalyticsHubPage() {
           </div>
         </section>
       </div>
+      )}
 
       {/* 2. CATEGORY NAVIGATION ANCHOR BAR */}
       <div

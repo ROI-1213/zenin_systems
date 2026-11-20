@@ -11,7 +11,8 @@ import {
   ArrowRight,
   Cpu,
 } from "lucide-react";
-import { getProducts } from "@/lib/db/queries";
+import { getPageContentBlock, getProducts } from "@/lib/db/queries";
+import { PRODUCTS_PAGE_DEFAULTS } from "@/lib/products-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { QuoteModalTrigger } from "@/components/forms/quote-modal";
@@ -26,11 +27,15 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function CctvSurveillancePage() {
-  const cctvProducts = await getProducts({ categorySlug: "cctv-surveillance" });
+  const [hubBlock, cctvProducts] = await Promise.all([
+    getPageContentBlock("products", "cctv_hub", PRODUCTS_PAGE_DEFAULTS.cctv_hub.data),
+    getProducts({ categorySlug: "cctv-surveillance" }),
+  ]);
 
   return (
     <div>
       {/* 1. HERO */}
+      {hubBlock.data.enabled !== false && (
       <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
         <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
           <div className="px-5 sm:px-8 lg:px-12">
@@ -45,20 +50,17 @@ export default async function CctvSurveillancePage() {
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/30 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
                   <Camera className="h-3.5 w-3.5" />
-                  <span>Core Solution Pillar 01</span>
+                  <span>{hubBlock.subtitle || PRODUCTS_PAGE_DEFAULTS.cctv_hub.subtitle}</span>
                 </div>
                 <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                  Industrial CCTV & Video Surveillance Solutions
+                  {hubBlock.title || PRODUCTS_PAGE_DEFAULTS.cctv_hub.title}
                 </h1>
                 <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                  Engineered surveillance architectures built for manufacturing plants,
-                  warehouses, perimeters, hazardous bays, and multi-site industrial
-                  operations—delivering continuous situational awareness and AI-ready
-                  video infrastructure.
+                  {hubBlock.data.description}
                 </p>
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <QuoteModalTrigger
-                    buttonText="Request CCTV Site Assessment & Quote"
+                    buttonText={hubBlock.data.primaryCtaText || PRODUCTS_PAGE_DEFAULTS.cctv_hub.data.primaryCtaText}
                     variant="cyan"
                     size="lg"
                     preselectedTopicName="Industrial CCTV & Video Surveillance"
@@ -89,6 +91,7 @@ export default async function CctvSurveillancePage() {
           </div>
         </section>
       </div>
+      )}
 
       {/* 2 & 3. OVERVIEW & CAPABILITIES */}
       <section className="bg-white py-16 lg:py-20">

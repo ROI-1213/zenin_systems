@@ -884,7 +884,22 @@ export async function savePageContentAction(input: {
     details: `${input.pageKey}.${input.sectionKey}`,
   });
 
-  safeRevalidate(["/", "/about-us", "/contact-us", "/privacy-policy", "/terms-and-conditions", "/admin/content", "/admin/home-page", "/admin/about-us"]);
+  safeRevalidate([
+    "/",
+    "/about-us",
+    "/products",
+    "/products/cctv-surveillance",
+    "/products/ai-video-analytics",
+    "/products/video-management",
+    "/products/intelligent-automation",
+    "/contact-us",
+    "/privacy-policy",
+    "/terms-and-conditions",
+    "/admin/content",
+    "/admin/home-page",
+    "/admin/about-us",
+    "/admin/products-page",
+  ]);
   return { success: true, block: updated };
 }
 

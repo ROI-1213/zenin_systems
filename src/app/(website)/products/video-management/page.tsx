@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { MonitorPlay, CheckCircle2, Server, Layers, ArrowRight } from "lucide-react";
-import { getProducts } from "@/lib/db/queries";
+import { getPageContentBlock, getProducts } from "@/lib/db/queries";
+import { PRODUCTS_PAGE_DEFAULTS } from "@/lib/products-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { QuoteModalTrigger } from "@/components/forms/quote-modal";
@@ -18,11 +19,15 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function VideoManagementPage() {
-  const vmsProducts = await getProducts({ categorySlug: "video-management" });
+  const [hubBlock, vmsProducts] = await Promise.all([
+    getPageContentBlock("products", "vms_hub", PRODUCTS_PAGE_DEFAULTS.vms_hub.data),
+    getProducts({ categorySlug: "video-management" }),
+  ]);
 
   return (
     <div>
       {/* HERO */}
+      {hubBlock.data.enabled !== false && (
       <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
         <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
           <div className="px-5 sm:px-8 lg:px-12">
@@ -38,20 +43,18 @@ export default async function VideoManagementPage() {
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
                   <MonitorPlay className="h-3.5 w-3.5" />
-                  <span>Core Solution Pillar 03</span>
+                  <span>{hubBlock.subtitle || PRODUCTS_PAGE_DEFAULTS.vms_hub.subtitle}</span>
                 </div>
                 <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                  Enterprise Video Management Solutions (VMS)
+                  {hubBlock.title || PRODUCTS_PAGE_DEFAULTS.vms_hub.title}
                 </h1>
                 <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                  Unify distributed industrial camera networks, AI analytics alerts,
-                  access control events, and perimeter sensors into a resilient,
-                  centralized command-and-control platform.
+                  {hubBlock.data.description}
                 </p>
 
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <QuoteModalTrigger
-                    buttonText="Request VMS Architecture Proposal"
+                    buttonText={hubBlock.data.primaryCtaText || PRODUCTS_PAGE_DEFAULTS.vms_hub.data.primaryCtaText}
                     variant="cyan"
                     size="lg"
                     preselectedTopicName="Video Management Solutions (VMS)"
@@ -82,6 +85,7 @@ export default async function VideoManagementPage() {
           </div>
         </section>
       </div>
+      )}
 
       {/* CORE CAPABILITIES */}
       <section className="bg-white py-16 lg:py-20">

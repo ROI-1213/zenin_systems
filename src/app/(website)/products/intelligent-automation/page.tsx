@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Cpu, CheckCircle2, ArrowRight, Wrench, Layers } from "lucide-react";
-import { getProducts, getServices } from "@/lib/db/queries";
+import { getPageContentBlock, getProducts, getServices } from "@/lib/db/queries";
+import { PRODUCTS_PAGE_DEFAULTS } from "@/lib/products-page-defaults";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { QuoteModalTrigger } from "@/components/forms/quote-modal";
@@ -18,7 +19,12 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function IntelligentAutomationPage() {
-  const [automationProducts, relatedServices] = await Promise.all([
+  const [hubBlock, automationProducts, relatedServices] = await Promise.all([
+    getPageContentBlock(
+      "products",
+      "automation_hub",
+      PRODUCTS_PAGE_DEFAULTS.automation_hub.data
+    ),
     getProducts({ categorySlug: "intelligent-automation" }),
     getServices({ limit: 4 }),
   ]);
@@ -26,6 +32,7 @@ export default async function IntelligentAutomationPage() {
   return (
     <div>
       {/* 1. HERO */}
+      {hubBlock.data.enabled !== false && (
       <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
         <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl sm:rounded-[36px] lg:rounded-[44px] border border-white/15 bg-[#0B1730] bg-industrial-grid py-12 text-white shadow-2xl sm:py-16 lg:py-20">
           <div className="px-5 sm:px-8 lg:px-12">
@@ -41,20 +48,18 @@ export default async function IntelligentAutomationPage() {
               <div className="lg:col-span-7">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#00B8D9]/35 bg-[#00B8D9]/10 px-3.5 py-1 text-xs font-semibold tracking-wider text-[#00B8D9] uppercase">
                   <Cpu className="h-3.5 w-3.5" />
-                  <span>Core Solution Pillar 04</span>
+                  <span>{hubBlock.subtitle || PRODUCTS_PAGE_DEFAULTS.automation_hub.subtitle}</span>
                 </div>
                 <h1 className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl">
-                  Intelligent Automation Solutions
+                  {hubBlock.title || PRODUCTS_PAGE_DEFAULTS.automation_hub.title}
                 </h1>
                 <p className="mt-4 text-base leading-relaxed text-slate-300 sm:text-lg">
-                  Connect AI computer vision, IIoT sensors, and electromechanical
-                  actuators to automate industrial gates, weighbridges, safety
-                  interlocks, and facility control workflows.
+                  {hubBlock.data.description}
                 </p>
 
                 <div className="mt-8 flex flex-wrap items-center gap-4">
                   <QuoteModalTrigger
-                    buttonText="Request Automation Engineering Quote"
+                    buttonText={hubBlock.data.primaryCtaText || PRODUCTS_PAGE_DEFAULTS.automation_hub.data.primaryCtaText}
                     variant="cyan"
                     size="lg"
                     preselectedTopicName="Intelligent Automation Solutions"
@@ -85,6 +90,7 @@ export default async function IntelligentAutomationPage() {
           </div>
         </section>
       </div>
+      )}
 
       {/* 2, 3 & 4. OVERVIEW, AI-ENABLED AUTOMATION & MONITORING APPLICATIONS */}
       <section className="bg-white py-16 lg:py-20">
