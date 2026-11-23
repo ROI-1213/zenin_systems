@@ -20,6 +20,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { savePageContentAction } from "@/lib/actions/admin-actions";
+import { FullPageSectionLayout } from "@/components/admin/full-page-section-layout";
 import type {
   ServicesIconCard,
   ServicesPageDefaults,
@@ -123,6 +124,7 @@ export function ServicesPageEditor({
   const [sections, setSections] =
     useState<Record<ServicesSectionKey, ServicesSectionEntry>>(initialSections);
   const [activeKey, setActiveKey] = useState<ServicesSectionKey>("banner");
+  const [isFullPage, setIsFullPage] = useState<boolean>(false);
   const [saving, setSaving] = useState(false);
   const [savedKey, setSavedKey] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -376,82 +378,26 @@ export function ServicesPageEditor({
         </div>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* SECTION BUTTONS */}
-        <div className="space-y-2 lg:col-span-4">
-          <div className="mb-2 text-[11px] font-bold tracking-wider text-[#64748B] uppercase">
-            Services Page Sections (6)
-          </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
-            {SECTION_META.map((meta) => {
-              const Icon = meta.icon;
-              const isActive = meta.key === activeKey;
-              const enabled = sections[meta.key]?.data?.enabled !== false;
-              return (
-                <button
-                  key={meta.key}
-                  type="button"
-                  onClick={() => {
-                    setActiveKey(meta.key);
-                    resetNotices();
-                  }}
-                  className={`group flex w-full items-center justify-between gap-3 rounded-xl border p-3.5 text-left transition ${
-                    isActive
-                      ? "border-[#1877F2] bg-[#1877F2] text-white shadow-md"
-                      : "border-[#E2E8F0] bg-white text-[#0B1730] hover:border-[#1877F2] hover:bg-[#F5F8FC]"
-                  }`}
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                        isActive ? "bg-white/20 text-white" : "bg-[#0B1730]/5 text-[#1877F2]"
-                      }`}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`text-[10px] font-extrabold uppercase ${
-                            isActive ? "text-white/80" : "text-[#1877F2]"
-                          }`}
-                        >
-                          {meta.number}
-                        </span>
-                        <span className="truncate text-xs font-bold">{meta.label}</span>
-                      </div>
-                      <div
-                        className={`mt-0.5 truncate text-[11px] ${
-                          isActive ? "text-white/80" : "text-[#64748B]"
-                        }`}
-                      >
-                        {meta.shortDesc}
-                      </div>
-                    </div>
-                  </div>
-                  {meta.key !== "detail_labels" && (
-                    <span
-                      className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                        enabled
-                          ? isActive
-                            ? "bg-white/20 text-white"
-                            : "bg-emerald-50 text-emerald-700"
-                          : isActive
-                          ? "bg-amber-400/30 text-white"
-                          : "bg-slate-100 text-slate-500"
-                      }`}
-                    >
-                      {enabled ? "Live" : "Hidden"}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ACTIVE SECTION FORM */}
-        <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-2xs lg:col-span-8">
+      <FullPageSectionLayout
+        sectionTitle="Services Page Sections"
+        metas={SECTION_META.map((m) => ({
+          ...m,
+          showStatusBadge: m.key !== "detail_labels",
+        }))}
+        activeKey={activeKey}
+        isFullPage={isFullPage}
+        isEnabledMap={SECTION_META.reduce((acc, m) => {
+          acc[m.key] = sections[m.key]?.data?.enabled !== false;
+          return acc;
+        }, {} as Record<ServicesSectionKey, boolean>)}
+        onSelectSection={(key) => {
+          setActiveKey(key);
+          setIsFullPage(true);
+          resetNotices();
+        }}
+        onBackToGrid={() => setIsFullPage(false)}
+      >
+        <div className="w-full rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-2xs sm:p-8">
           <form onSubmit={handleSave} className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2E8F0] pb-4">
               <div>
@@ -654,7 +600,7 @@ export function ServicesPageEditor({
             </div>
           </form>
         </div>
-      </div>
+      </FullPageSectionLayout>
     </div>
   );
 }

@@ -25,6 +25,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { savePageContentAction } from "@/lib/actions/admin-actions";
+import { FullPageSectionLayout } from "@/components/admin/full-page-section-layout";
 import type { HomeSectionDefaults, HomeWhyChoosePillar } from "@/lib/home-defaults";
 
 export type HomeSectionKey = keyof HomeSectionDefaults;
@@ -160,6 +161,7 @@ export function HomePageEditor({
     initialSections
   );
   const [activeKey, setActiveKey] = useState<HomeSectionKey>("hero");
+  const [isFullPage, setIsFullPage] = useState<boolean>(false);
   const [saving, setSaving] = useState(false);
   const [savedKey, setSavedKey] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -376,7 +378,7 @@ export function HomePageEditor({
   const renderTextField = (
     label: string,
     field: string,
-    opts?: { multiline?: boolean; placeholder?: string; isImage?: boolean }
+    opts?: { multiline?: boolean; placeholder?: string; isImage?: boolean; isVideo?: boolean }
   ) => {
     const val = String(activeSection.data[field] ?? "");
     return (
@@ -401,19 +403,36 @@ export function HomePageEditor({
             className="w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] px-3.5 py-2.5 text-sm text-[#0B1730] focus:border-[#1877F2] focus:bg-white focus:outline-none"
           />
         )}
+        {opts?.isVideo && val && (
+          <div className="mt-2.5 overflow-hidden rounded-xl border border-[#E2E8F0] bg-[#0B1730] p-2">
+            <video
+              key={val}
+              src={val}
+              controls
+              muted
+              playsInline
+              className="h-56 w-full rounded-lg object-cover"
+            />
+          </div>
+        )}
         {opts?.isImage && val && (
           <div className="mt-2.5 overflow-hidden rounded-xl border border-[#E2E8F0] bg-[#0B1730] p-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={val}
               alt="Section preview"
-              className="h-36 w-full rounded-lg object-cover"
+              className="h-44 w-full rounded-lg object-cover"
             />
           </div>
         )}
       </div>
     );
   };
+
+  const isEnabledMap = SECTION_META.reduce((acc, m) => {
+    acc[m.key] = sections[m.key]?.data?.enabled !== false;
+    return acc;
+  }, {} as Record<HomeSectionKey, boolean>);
 
   return (
     <div className="space-y-6">
@@ -437,85 +456,21 @@ export function HomePageEditor({
         </Link>
       </div>
 
-      {/* SECTION BUTTONS GRID (SPECIFIC BUTTON FOR EACH HOME PAGE SECTION) */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <div className="space-y-2 lg:col-span-4">
-          <div className="mb-2 text-[11px] font-bold tracking-wider text-[#64748B] uppercase">
-            Home Page Sections (11)
-          </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-1">
-            {SECTION_META.map((meta) => {
-              const Icon = meta.icon;
-              const isActive = meta.key === activeKey;
-              const enabled = sections[meta.key]?.data?.enabled !== false;
-              return (
-                <button
-                  key={meta.key}
-                  type="button"
-                  onClick={() => {
-                    setActiveKey(meta.key);
-                    setSavedKey(null);
-                    setErrorMsg(null);
-                  }}
-                  className={`group flex w-full items-center justify-between gap-3 rounded-xl border p-3.5 text-left transition ${
-                    isActive
-                      ? "border-[#1877F2] bg-[#1877F2] text-white shadow-md"
-                      : "border-[#E2E8F0] bg-white text-[#0B1730] hover:border-[#1877F2] hover:bg-[#F5F8FC]"
-                  }`}
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div
-                      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-                        isActive
-                          ? "bg-white/20 text-white"
-                          : "bg-[#0B1730]/5 text-[#1877F2]"
-                      }`}
-                    >
-                      <Icon className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <div className="flex items-center gap-1.5">
-                        <span
-                          className={`text-[10px] font-extrabold uppercase ${
-                            isActive ? "text-white/80" : "text-[#1877F2]"
-                          }`}
-                        >
-                          {meta.number}
-                        </span>
-                        <span className="truncate text-xs font-bold">
-                          {meta.label}
-                        </span>
-                      </div>
-                      <div
-                        className={`mt-0.5 truncate text-[11px] ${
-                          isActive ? "text-white/80" : "text-[#64748B]"
-                        }`}
-                      >
-                        {meta.shortDesc}
-                      </div>
-                    </div>
-                  </div>
-                  <span
-                    className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
-                      enabled
-                        ? isActive
-                          ? "bg-white/20 text-white"
-                          : "bg-emerald-50 text-emerald-700"
-                        : isActive
-                        ? "bg-amber-400/30 text-white"
-                        : "bg-slate-100 text-slate-500"
-                    }`}
-                  >
-                    {enabled ? "Live" : "Hidden"}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* ACTIVE SECTION EDITOR */}
-        <div className="rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-2xs lg:col-span-8">
+      <FullPageSectionLayout
+        sectionTitle="Home Page Sections"
+        metas={SECTION_META}
+        activeKey={activeKey}
+        isFullPage={isFullPage}
+        isEnabledMap={isEnabledMap}
+        onSelectSection={(key) => {
+          setActiveKey(key);
+          setIsFullPage(true);
+          setSavedKey(null);
+          setErrorMsg(null);
+        }}
+        onBackToGrid={() => setIsFullPage(false)}
+      >
+        <div className="w-full rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-2xs sm:p-8">
           <form onSubmit={handleSave} className="space-y-6">
             {/* EDITOR HEADER */}
             <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#E2E8F0] pb-4">
@@ -637,6 +592,7 @@ export function HomePageEditor({
                     {renderTextField("Secondary Button Link", "secondaryCtaHref")}
                   </div>
                   {renderTextField("Hero Banner Video Path / URL (MP4)", "heroVideo", {
+                    isVideo: true,
                     placeholder: "/videos/hero-banner.mp4",
                   })}
                   {renderTextField("Hero Fallback Poster Image Path / URL", "heroImage", {
@@ -738,7 +694,7 @@ export function HomePageEditor({
             </div>
           </form>
         </div>
-      </div>
+      </FullPageSectionLayout>
     </div>
   );
 }
