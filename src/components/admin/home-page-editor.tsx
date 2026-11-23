@@ -51,7 +51,7 @@ const SECTION_META: SectionMeta[] = [
     key: "hero",
     number: "01",
     label: "Hero Banner",
-    shortDesc: "Headline, buttons, hero photo & 4 highlights",
+    shortDesc: "Hero banner video & action buttons",
     icon: Star,
   },
   {
@@ -551,39 +551,42 @@ export function HomePageEditor({
               </div>
             )}
 
-            {/* COMMON HEADING & EYEBROW */}
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-1.5 block text-xs font-bold tracking-wider text-[#0B1730] uppercase">
-                  Eyebrow / Badge Subtitle
-                </label>
-                <input
-                  type="text"
-                  value={activeSection.subtitle}
-                  onChange={(e) => updateActive({ subtitle: e.target.value })}
-                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] px-3.5 py-2.5 text-sm text-[#0B1730] focus:border-[#1877F2] focus:bg-white focus:outline-none"
-                />
-              </div>
+            {/* COMMON HEADING & EYEBROW (HIDDEN FOR VIDEO-ONLY HERO BANNER) */}
+            {activeKey !== "hero" && (
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-wider text-[#0B1730] uppercase">
+                    Eyebrow / Badge Subtitle
+                  </label>
+                  <input
+                    type="text"
+                    value={activeSection.subtitle}
+                    onChange={(e) => updateActive({ subtitle: e.target.value })}
+                    className="w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] px-3.5 py-2.5 text-sm text-[#0B1730] focus:border-[#1877F2] focus:bg-white focus:outline-none"
+                  />
+                </div>
 
-              <div>
-                <label className="mb-1.5 block text-xs font-bold tracking-wider text-[#0B1730] uppercase">
-                  Main Section Title
-                </label>
-                <input
-                  type="text"
-                  value={activeSection.title}
-                  onChange={(e) => updateActive({ title: e.target.value })}
-                  className="w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] px-3.5 py-2.5 text-sm font-semibold text-[#0B1730] focus:border-[#1877F2] focus:bg-white focus:outline-none"
-                />
+                <div>
+                  <label className="mb-1.5 block text-xs font-bold tracking-wider text-[#0B1730] uppercase">
+                    Main Section Title
+                  </label>
+                  <input
+                    type="text"
+                    value={activeSection.title}
+                    onChange={(e) => updateActive({ title: e.target.value })}
+                    className="w-full rounded-xl border border-[#E2E8F0] bg-[#F5F8FC] px-3.5 py-2.5 text-sm font-semibold text-[#0B1730] focus:border-[#1877F2] focus:bg-white focus:outline-none"
+                  />
+                </div>
               </div>
-            </div>
+            )}
 
             {/* SECTION-SPECIFIC FIELDS */}
             <div className="space-y-5 border-t border-[#E2E8F0] pt-5">
               {activeKey === "hero" && (
                 <>
-                  {renderTextField("Hero Description", "description", {
-                    multiline: true,
+                  {renderTextField("Hero Banner Video Path / URL (MP4)", "heroVideo", {
+                    isVideo: true,
+                    placeholder: "/videos/hero-banner.mp4?v=2",
                   })}
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     {renderTextField("Primary Button Text", "primaryCtaText")}
@@ -591,19 +594,10 @@ export function HomePageEditor({
                     {renderTextField("Secondary Button Text", "secondaryCtaText")}
                     {renderTextField("Secondary Button Link", "secondaryCtaHref")}
                   </div>
-                  {renderTextField("Hero Banner Video Path / URL (MP4)", "heroVideo", {
-                    isVideo: true,
-                    placeholder: "/videos/hero-banner.mp4",
-                  })}
-                  {renderTextField("Hero Fallback Poster Image Path / URL", "heroImage", {
+                  {renderTextField("Hero Fallback Image Path / URL", "heroImage", {
                     isImage: true,
                     placeholder: "/images/hero/hero-command-center.png",
                   })}
-                  {renderStringListEditor(
-                    "Hero Highlight Bullets",
-                    "highlights",
-                    "e.g. 21 Specialized AI Video Analytics Applications"
-                  )}
                 </>
               )}
 
