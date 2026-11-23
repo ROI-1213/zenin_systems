@@ -101,7 +101,7 @@ export async function Footer() {
                 width={280}
                 height={180}
                 priority
-                className="h-14 w-auto object-contain transition-transform group-hover:scale-105 sm:h-16"
+                className="h-16 w-auto object-contain transition-transform group-hover:scale-105 sm:h-20"
               />
             </Link>
 
