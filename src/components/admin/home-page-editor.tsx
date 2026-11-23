@@ -636,7 +636,10 @@ export function HomePageEditor({
                     {renderTextField("Secondary Button Text", "secondaryCtaText")}
                     {renderTextField("Secondary Button Link", "secondaryCtaHref")}
                   </div>
-                  {renderTextField("Hero Background Image Path / URL", "heroImage", {
+                  {renderTextField("Hero Banner Video Path / URL (MP4)", "heroVideo", {
+                    placeholder: "/videos/hero-banner.mp4",
+                  })}
+                  {renderTextField("Hero Fallback Poster Image Path / URL", "heroImage", {
                     isImage: true,
                     placeholder: "/images/hero/hero-command-center.png",
                   })}

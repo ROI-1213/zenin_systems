@@ -16,6 +16,7 @@ export interface HomeSectionDefaults {
       secondaryCtaText: string;
       secondaryCtaHref: string;
       heroImage: string;
+      heroVideo: string;
       highlights: string[];
     };
   };
@@ -134,6 +135,7 @@ export const HOME_SECTION_DEFAULTS: HomeSectionDefaults = {
       secondaryCtaText: "Request a Quote",
       secondaryCtaHref: "/contact-us",
       heroImage: "/images/hero/hero-command-center.png",
+      heroVideo: "/videos/hero-banner.mp4",
       highlights: [
         "Industrial CCTV & Network Video Infrastructure",
         "21 Specialized AI Video Analytics Applications",

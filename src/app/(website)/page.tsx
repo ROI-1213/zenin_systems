@@ -97,6 +97,9 @@ export default async function HomePage() {
           heroImage={
             heroBlock.data.heroImage || HOME_SECTION_DEFAULTS.hero.data.heroImage
           }
+          heroVideo={
+            heroBlock.data.heroVideo || HOME_SECTION_DEFAULTS.hero.data.heroVideo
+          }
           highlights={heroBlock.data.highlights || []}
         />
       )}
