@@ -173,20 +173,16 @@ interface CinematicHeroProps {
 }
 
 export function CinematicHero({
-  title,
-  subtitle,
-  description,
   primaryCtaText,
   primaryCtaHref,
   secondaryCtaText,
   heroImage,
   heroVideo = "/videos/hero-banner.mp4?v=2",
-  highlights,
 }: CinematicHeroProps) {
   return (
     <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
-      <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/15 bg-[#060F20] py-14 text-white shadow-2xl sm:rounded-[36px] sm:py-20 lg:min-h-[580px] lg:rounded-[44px] lg:py-24">
-        {/* LAYER 1: 100% ORIGINAL QUALITY UNBLURRED HERO VIDEO (NO DARK WASH, NO BLUR, NO POSTER FLASH) */}
+      <section className="relative mx-auto flex min-h-[360px] max-w-7xl items-end overflow-hidden rounded-3xl border border-white/15 bg-[#060F20] py-8 text-white shadow-2xl sm:min-h-[500px] sm:rounded-[36px] sm:py-10 lg:min-h-[600px] lg:rounded-[44px] lg:py-12">
+        {/* LAYER 1: 100% ORIGINAL QUALITY UNBLURRED HERO VIDEO */}
         <div
           className="pointer-events-none absolute inset-0 z-0"
           aria-hidden="true"
@@ -214,134 +210,29 @@ export function CinematicHero({
           )}
         </div>
 
-        {/* LAYER 2: FOREGROUND CONTENT (NO BLUR OR GRADIENT HAZE OVER VIDEO) */}
-        <div className="relative z-10 px-5 sm:px-8 lg:px-12">
-          <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
-            {/* LEFT: ENTRANCE TYPOGRAPHY & CTAs */}
-            <div className="lg:col-span-7">
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, ease: LUXURY_EASE }}
-                className="inline-flex max-w-full items-center gap-2 rounded-full border border-[#00B8D9]/50 bg-[#060F20]/75 px-3.5 py-1.5 text-[11px] font-semibold tracking-wider text-[#00B8D9] uppercase shadow-sm sm:px-4 sm:text-xs"
-              >
-                <Cpu className="h-3.5 w-3.5 shrink-0 text-[#00B8D9]" />
-                <span className="truncate">{subtitle}</span>
-              </motion.div>
-
-              <motion.h1
-                initial={{ opacity: 0, y: 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.06, ease: LUXURY_EASE }}
-                className="mt-5 text-2xl font-extrabold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:mt-6 sm:text-5xl lg:text-[54px] lg:leading-[1.1]"
-              >
-                {title}
-              </motion.h1>
-
-              <motion.p
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.12, ease: LUXURY_EASE }}
-                className="mt-4 max-w-2xl text-sm leading-relaxed text-slate-100 drop-shadow-[0_1px_8px_rgba(0,0,0,0.7)] sm:mt-6 sm:text-lg"
-              >
-                {description}
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.18, ease: LUXURY_EASE }}
-                className="mt-6 grid grid-cols-1 gap-3 sm:mt-8 sm:flex sm:flex-wrap sm:items-center sm:gap-4"
-              >
-                <Link
-                  href={primaryCtaHref}
-                  className="touch-btn group relative inline-flex min-h-[52px] w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#1877F2] to-[#0095B0] px-6 py-3.5 text-sm font-bold text-white shadow-lg transition hover:shadow-xl sm:w-auto sm:text-base"
-                >
-                  <span>{primaryCtaText}</span>
-                  <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
-                </Link>
-
-                <QuoteModalTrigger
-                  buttonText={secondaryCtaText}
-                  variant="cyan"
-                  size="lg"
-                  className="w-full sm:w-auto"
-                />
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.24, ease: LUXURY_EASE }}
-                className="mt-8 grid grid-cols-1 gap-2.5 pt-4 sm:mt-10 sm:grid-cols-2 sm:gap-3"
-              >
-                {highlights.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2.5 rounded-xl border border-white/15 bg-[#060F20]/75 px-3.5 py-2.5 text-xs shadow-sm sm:text-sm"
-                  >
-                    <CheckCircle2 className="h-4 w-4 shrink-0 text-[#00B8D9]" />
-                    <span className="font-medium text-white">{item}</span>
-                  </div>
-                ))}
-              </motion.div>
-            </div>
-
-            {/* RIGHT: COMPACT BOTTOM TELEMETRY BAR (LEAVES FULL HERO VIDEO UNOBSTRUCTED & UNBLURRED) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: LUXURY_EASE }}
-              className="flex flex-col items-start gap-3 lg:col-span-5 lg:items-end"
+        {/* LAYER 2: ACTION BUTTONS ONLY (ALL CIRCLED TEXT & STATS BOXES REMOVED) */}
+        <div className="relative z-10 w-full px-5 sm:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1, ease: LUXURY_EASE }}
+            className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap sm:items-center sm:gap-4"
+          >
+            <Link
+              href={primaryCtaHref}
+              className="touch-btn group relative inline-flex min-h-[50px] w-full items-center justify-center gap-2.5 overflow-hidden rounded-xl bg-gradient-to-r from-[#1877F2] to-[#0095B0] px-6 py-3 text-sm font-bold text-white shadow-lg transition hover:shadow-xl sm:w-auto sm:text-base"
             >
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-[#081424]/85 px-3.5 py-1.5 text-[11px] font-semibold text-white shadow-lg">
-                <span className="relative flex h-2.5 w-2.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                </span>
-                <Activity className="h-3.5 w-3.5 text-[#00B8D9]" />
-                <span className="tracking-wider uppercase">
-                  AI Vision & Telemetry Active
-                </span>
-              </div>
+              <span>{primaryCtaText}</span>
+              <ArrowRight className="h-4 w-4 shrink-0 transition-transform duration-200 group-hover:translate-x-1" />
+            </Link>
 
-              <div className="grid w-full max-w-sm grid-cols-3 divide-x divide-white/15 overflow-hidden rounded-2xl border border-white/20 bg-[#081424]/85 p-3 text-center shadow-xl">
-                <div className="px-2">
-                  <div className="text-[10px] font-semibold text-[#00B8D9] uppercase">
-                    Pillars
-                  </div>
-                  <div className="mt-0.5 text-base font-extrabold text-white sm:text-lg">
-                    4
-                  </div>
-                  <div className="truncate text-[10px] text-slate-300">
-                    Solution Suites
-                  </div>
-                </div>
-                <div className="px-2">
-                  <div className="text-[10px] font-semibold text-[#00B8D9] uppercase">
-                    AI Vision
-                  </div>
-                  <div className="mt-0.5 text-base font-extrabold text-white sm:text-lg">
-                    21
-                  </div>
-                  <div className="truncate text-[10px] text-slate-300">
-                    AI Applications
-                  </div>
-                </div>
-                <div className="px-2">
-                  <div className="text-[10px] font-semibold text-[#00B8D9] uppercase">
-                    Services
-                  </div>
-                  <div className="mt-0.5 text-base font-extrabold text-white sm:text-lg">
-                    13
-                  </div>
-                  <div className="truncate text-[10px] text-slate-300">
-                    Eng. Verticals
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+            <QuoteModalTrigger
+              buttonText={secondaryCtaText}
+              variant="cyan"
+              size="lg"
+              className="w-full sm:w-auto"
+            />
+          </motion.div>
         </div>
       </section>
     </div>
