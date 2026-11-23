@@ -11,6 +11,7 @@ import {
   getFallbackServiceBySlug,
   getFallbackServices,
   getFallbackSiteSettingsMap,
+  getFallbackTestimonials,
 } from "./seed-fallback";
 
 export interface ParsedProduct {
@@ -590,12 +591,13 @@ export async function getPublishedProjects() {
 
 export async function getPublishedTestimonials() {
   try {
-    return await prisma.testimonial.findMany({
+    const rows = await prisma.testimonial.findMany({
       where: { status: "PUBLISHED" },
       orderBy: { sortOrder: "asc" },
     });
+    return rows.length > 0 ? rows : getFallbackTestimonials();
   } catch {
-    return [];
+    return getFallbackTestimonials();
   }
 }
 

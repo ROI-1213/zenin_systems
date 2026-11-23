@@ -8,6 +8,7 @@ import {
   INITIAL_INDUSTRIES,
   INITIAL_SITE_SETTINGS,
   INITIAL_PAGE_CONTENTS,
+  INITIAL_TESTIMONIALS,
 } from "./seed-data";
 import type { ParsedAISolution, ParsedProduct, ParsedService } from "./queries";
 import { safeJsonParse } from "@/lib/utilities";
@@ -214,6 +215,23 @@ export function getFallbackIndustries() {
     applications: ind.applications,
     sortOrder: ind.sortOrder,
     status: "PUBLISHED",
+    createdAt: now,
+    updatedAt: now,
+  }));
+}
+
+export function getFallbackTestimonials() {
+  return INITIAL_TESTIMONIALS.map((t, idx) => ({
+    id: `seed-testimonial-${idx + 1}`,
+    clientName: t.clientName,
+    companyName: t.companyName,
+    designation: t.designation,
+    feedback: t.feedback,
+    clientImage: null,
+    companyLogo: null,
+    isFeatured: t.isFeatured,
+    status: t.status,
+    sortOrder: t.sortOrder,
     createdAt: now,
     updatedAt: now,
   }));

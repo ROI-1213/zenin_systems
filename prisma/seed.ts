@@ -10,6 +10,7 @@ import {
   INITIAL_INDUSTRIES,
   INITIAL_PAGE_CONTENTS,
   INITIAL_SITE_SETTINGS,
+  INITIAL_TESTIMONIALS,
 } from "../src/lib/db/seed-data";
 
 const prisma = new PrismaClient();
@@ -294,6 +295,15 @@ export async function runSeed() {
     });
   }
   console.log(`✅ Seeded ${INITIAL_SITE_SETTINGS.length} site settings.`);
+
+  // 8b. Seed Initial Testimonials if none exist
+  const existingTestimonialsCount = await prisma.testimonial.count();
+  if (existingTestimonialsCount === 0) {
+    for (const t of INITIAL_TESTIMONIALS) {
+      await prisma.testimonial.create({ data: t });
+    }
+    console.log(`✅ Seeded ${INITIAL_TESTIMONIALS.length} client testimonials.`);
+  }
 
   // 9. Bootstrap Initial SUPER_ADMIN User from environment variables
   const adminEmail = process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase();

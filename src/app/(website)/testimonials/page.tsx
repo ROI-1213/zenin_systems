@@ -1,7 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Quote, MessageSquareQuote, ArrowRight } from "lucide-react";
+import { Quote, MessageSquareQuote, ArrowRight, Star, CheckCircle2 } from "lucide-react";
 import { getPublishedTestimonials } from "@/lib/db/queries";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { QuoteModalTrigger } from "@/components/forms/quote-modal";
@@ -71,28 +71,57 @@ export default async function TestimonialsPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {testimonials.map((t) => (
-                <blockquote
-                  key={t.id}
-                  className="flex flex-col justify-between rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC] p-7 shadow-2xs"
-                >
-                  <div>
-                    <Quote className="h-7 w-7 text-[#1877F2]" />
-                    <p className="mt-4 text-sm leading-relaxed text-[#172033] sm:text-base">
-                      &ldquo;{t.feedback}&rdquo;
-                    </p>
-                  </div>
-                  <footer className="mt-6 border-t border-[#E2E8F0] pt-4">
-                    <div className="text-base font-bold text-[#0B1730]">
-                      {t.clientName}
+              {testimonials.map((t) => {
+                const initials = t.clientName
+                  .split(" ")
+                  .filter(Boolean)
+                  .slice(0, 2)
+                  .map((w) => w[0]?.toUpperCase())
+                  .join("");
+                return (
+                  <blockquote
+                    key={t.id}
+                    className="group flex flex-col justify-between rounded-2xl border border-[#E2E8F0] bg-[#F5F8FC] p-7 shadow-2xs transition hover:-translate-y-1 hover:border-[#1877F2] hover:bg-white hover:shadow-lg"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-1 text-amber-400">
+                          {[...Array(5)].map((_, idx) => (
+                            <Star
+                              key={idx}
+                              className="h-4 w-4 fill-amber-400 text-amber-400"
+                            />
+                          ))}
+                        </div>
+                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700">
+                          <CheckCircle2 className="h-3 w-3" />
+                          <span>Verified Client</span>
+                        </span>
+                      </div>
+
+                      <Quote className="mt-4 h-7 w-7 text-[#1877F2]/80" />
+                      <p className="mt-3 text-sm leading-relaxed text-[#172033] sm:text-base">
+                        &ldquo;{t.feedback}&rdquo;
+                      </p>
                     </div>
-                    <div className="text-xs font-medium text-[#64748B]">
-                      {t.designation ? `${t.designation} • ` : ""}
-                      {t.companyName}
-                    </div>
-                  </footer>
-                </blockquote>
-              ))}
+
+                    <footer className="mt-6 flex items-center gap-3.5 border-t border-[#E2E8F0] pt-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0B1730] text-xs font-extrabold text-[#00B8D9]">
+                        {initials || "ZS"}
+                      </div>
+                      <div className="min-w-0">
+                        <div className="truncate text-base font-bold text-[#0B1730]">
+                          {t.clientName}
+                        </div>
+                        <div className="truncate text-xs font-medium text-[#64748B]">
+                          {t.designation ? `${t.designation} • ` : ""}
+                          {t.companyName}
+                        </div>
+                      </div>
+                    </footer>
+                  </blockquote>
+                );
+              })}
             </div>
           )}
         </div>

@@ -2375,3 +2375,56 @@ export const INITIAL_SITE_SETTINGS = [
     description: "Default site meta description",
   },
 ];
+
+export const INITIAL_TESTIMONIALS = [
+  {
+    clientName: "Rajeshwar Rao",
+    companyName: "Apex Steel & Metallurgical Works, Jamshedpur",
+    designation: "Head of Plant Operations & EHS",
+    feedback:
+      "Zenin Systems deployed custom SS316L water-cooled camera enclosures and radiometric furnace thermal monitoring across our blast furnace and hot-rolling bays. Their AI PPE and danger-zone analytics have dramatically improved shop-floor safety compliance while withstanding 24/7 extreme radiant heat.",
+    isFeatured: true,
+    status: "PUBLISHED",
+    sortOrder: 1,
+  },
+  {
+    clientName: "Vikramaditya Menon",
+    companyName: "Bharat Freight & Container Terminals, Navi Mumbai",
+    designation: "VP — Supply Chain & Yard Infrastructure",
+    feedback:
+      "Integrating Zenin Systems' ANPR & Vehicle Speed Detection with our weighbridges and heavy-duty boom barriers cut commercial truck gate turnaround times by nearly 60%. Real-time overspeed alerts and automated plate logging have made internal yard traffic noticeably safer.",
+    isFeatured: true,
+    status: "PUBLISHED",
+    sortOrder: 2,
+  },
+  {
+    clientName: "Dr. Ananya Deshmukh",
+    companyName: "Precision BioPharma & Formulations Ltd., Hyderabad",
+    designation: "Director of Facility Engineering",
+    feedback:
+      "Their team delivered a unified Integrated Building Management System (IBMS) connecting our cleanroom HVAC controls, addressable fire detection panels, and multi-door biometric access control. Single-point accountability from design through commissioning made audit validation seamless.",
+    isFeatured: true,
+    status: "PUBLISHED",
+    sortOrder: 3,
+  },
+  {
+    clientName: "Suresh Kumar Natarajan",
+    companyName: "Dakshin Cement & Clinker Industries, Coimbatore",
+    designation: "Chief Electrical & Automation Engineer",
+    feedback:
+      "From rotary kiln thermal hotspot scanning and conveyor belt monitoring to custom heavy-duty camera pole fabrication and actuated process valves, Zenin Systems understands harsh plant conditions and delivers rugged, reliable industrial engineering.",
+    isFeatured: true,
+    status: "PUBLISHED",
+    sortOrder: 4,
+  },
+  {
+    clientName: "Arvind Singhania",
+    companyName: "Crestline Industrial Parks & Warehousing SEZ, Pune",
+    designation: "General Manager — Corporate Security",
+    feedback:
+      "Zenin Systems consolidated over 300 multi-site IP cameras, perimeter intrusion fencing sensors, and AI fire/smoke video detection into a single command-room VMS video wall. Their post-commissioning AMC and technical responsiveness have been exemplary.",
+    isFeatured: true,
+    status: "PUBLISHED",
+    sortOrder: 5,
+  },
+];
