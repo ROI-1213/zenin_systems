@@ -43,59 +43,67 @@ export async function loginAdminAction(rawInput: {
   email: string;
   password: string;
 }): Promise<{ success: boolean; error?: string }> {
-  const parsed = loginSchema.safeParse(rawInput);
-  if (!parsed.success) {
-    return { success: false, error: "Invalid email or password format." };
-  }
+  try {
+    const parsed = loginSchema.safeParse(rawInput);
+    if (!parsed.success) {
+      return { success: false, error: "Invalid email or password format." };
+    }
 
-  const email = parsed.data.email.toLowerCase();
-  const rate = checkRateLimit(`login:${email}`, 6, 60_000);
-  if (!rate.allowed) {
-    return {
-      success: false,
-      error: `Too many login attempts. Please wait ${rate.retryAfterSeconds} seconds.`,
+    const email = parsed.data.email.toLowerCase();
+    const rate = checkRateLimit(`login:${email}`, 6, 60_000);
+    if (!rate.allowed) {
+      return {
+        success: false,
+        error: `Too many login attempts. Please wait ${rate.retryAfterSeconds} seconds.`,
+      };
+    }
+
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user || !user.isActive) {
+      await logAuditEvent({
+        user: null,
+        action: "LOGIN_FAILED",
+        entityType: "User",
+        details: `Failed login attempt for ${email}`,
+      });
+      return { success: false, error: "Invalid administrator credentials." };
+    }
+
+    const valid = await verifyPassword(parsed.data.password, user.passwordHash);
+    if (!valid) {
+      await logAuditEvent({
+        user: null,
+        action: "LOGIN_FAILED",
+        entityType: "User",
+        entityId: user.id,
+        details: `Invalid password for ${email}`,
+      });
+      return { success: false, error: "Invalid administrator credentials." };
+    }
+
+    const sessionUser = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: (user.role as "SUPER_ADMIN" | "EDITOR") || "EDITOR",
     };
-  }
 
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user || !user.isActive) {
+    await createAdminSession(sessionUser);
     await logAuditEvent({
-      user: null,
-      action: "LOGIN_FAILED",
-      entityType: "User",
-      details: `Failed login attempt for ${email}`,
-    });
-    return { success: false, error: "Invalid administrator credentials." };
-  }
-
-  const valid = await verifyPassword(parsed.data.password, user.passwordHash);
-  if (!valid) {
-    await logAuditEvent({
-      user: null,
-      action: "LOGIN_FAILED",
+      user: sessionUser,
+      action: "LOGIN_SUCCESS",
       entityType: "User",
       entityId: user.id,
-      details: `Invalid password for ${email}`,
     });
-    return { success: false, error: "Invalid administrator credentials." };
+
+    return { success: true };
+  } catch (err) {
+    console.error("[loginAdminAction] Error:", err);
+    return {
+      success: false,
+      error: "Database connection or server error during sign-in. Please verify DATABASE_URL and try again.",
+    };
   }
-
-  const sessionUser = {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    role: (user.role as "SUPER_ADMIN" | "EDITOR") || "EDITOR",
-  };
-
-  await createAdminSession(sessionUser);
-  await logAuditEvent({
-    user: sessionUser,
-    action: "LOGIN_SUCCESS",
-    entityType: "User",
-    entityId: user.id,
-  });
-
-  return { success: true };
 }
 
 export async function logoutAdminAction() {

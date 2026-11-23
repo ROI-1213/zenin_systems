@@ -1,7 +1,7 @@
 /**
  * Parse ALLOWED_HOSTS from `.env` (comma-separated hostnames, e.g.
  * `ALLOWED_HOSTS="zeninsystems.com,www.zeninsystems.com,localhost"` or `*`)
- * and also include the hostname from `NEXT_PUBLIC_SITE_URL` if configured.
+ * and also include the hostname from `NEXT_PUBLIC_SITE_URL` / Vercel env vars.
  */
 function parseAllowedHosts() {
   const hosts = new Set(["localhost", "127.0.0.1"]);
@@ -27,9 +27,18 @@ function parseAllowedHosts() {
     }
   }
 
+  if (process.env.VERCEL_URL) hosts.add(process.env.VERCEL_URL);
+  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
+    hosts.add(process.env.VERCEL_PROJECT_PRODUCTION_URL);
+  }
+  if (process.env.VERCEL) {
+    hosts.add("*.vercel.app");
+  }
+
   return Array.from(hosts);
 }
 
+const hasExplicitAllowedHosts = Boolean(process.env.ALLOWED_HOSTS?.trim());
 const allowedHosts = parseAllowedHosts();
 const allowAllHosts = allowedHosts.includes("*");
 
@@ -37,11 +46,15 @@ const allowAllHosts = allowedHosts.includes("*");
 const nextConfig = {
   reactStrictMode: true,
   allowedDevOrigins: allowAllHosts ? ["*"] : allowedHosts,
-  experimental: {
-    serverActions: {
-      allowedOrigins: allowAllHosts ? ["*"] : allowedHosts,
-    },
-  },
+  ...(hasExplicitAllowedHosts
+    ? {
+        experimental: {
+          serverActions: {
+            allowedOrigins: allowAllHosts ? ["*"] : allowedHosts,
+          },
+        },
+      }
+    : {}),
   images: {
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
