@@ -180,13 +180,13 @@ export function CinematicHero({
   primaryCtaHref,
   secondaryCtaText,
   heroImage,
-  heroVideo = "/videos/hero-banner.mp4",
+  heroVideo = "/videos/hero-banner.mp4?v=2",
   highlights,
 }: CinematicHeroProps) {
   return (
     <div className="w-full px-3 pt-2 pb-6 sm:px-6 sm:pt-3 sm:pb-8 lg:px-8 lg:pb-10">
       <section className="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-white/15 bg-[#060F20] py-14 text-white shadow-2xl sm:rounded-[36px] sm:py-20 lg:min-h-[580px] lg:rounded-[44px] lg:py-24">
-        {/* LAYER 1: ORIGINAL QUALITY UNBLURRED HERO VIDEO */}
+        {/* LAYER 1: 100% ORIGINAL QUALITY UNBLURRED HERO VIDEO (NO DARK WASH, NO BLUR, NO POSTER FLASH) */}
         <div
           className="pointer-events-none absolute inset-0 z-0"
           aria-hidden="true"
@@ -195,7 +195,6 @@ export function CinematicHero({
             <video
               key={heroVideo}
               src={heroVideo}
-              poster={heroImage || "/images/hero/hero-command-center.png"}
               autoPlay
               loop
               muted
@@ -215,17 +214,7 @@ export function CinematicHero({
           )}
         </div>
 
-        {/* LAYER 2: SUBTLE LEFT TEXT-CONTRAST GRADIENT ONLY (NO BLUR, NO GRID WASH, FULL VIDEO CLARITY) */}
-        <div
-          className="pointer-events-none absolute inset-0 z-0 bg-gradient-to-r from-[#060F20]/75 via-[#060F20]/30 to-transparent"
-          aria-hidden="true"
-        />
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 z-0 h-20 bg-gradient-to-t from-[#060F20]/60 to-transparent"
-          aria-hidden="true"
-        />
-
-        {/* LAYER 3: FOREGROUND CONTENT (LEFT-ALIGNED SO VIDEO IS UNOBSTRUCTED & CRYSTAL CLEAR) */}
+        {/* LAYER 2: FOREGROUND CONTENT (NO BLUR OR GRADIENT HAZE OVER VIDEO) */}
         <div className="relative z-10 px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
             {/* LEFT: ENTRANCE TYPOGRAPHY & CTAs */}
