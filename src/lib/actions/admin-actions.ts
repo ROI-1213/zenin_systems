@@ -99,9 +99,22 @@ export async function loginAdminAction(rawInput: {
     return { success: true };
   } catch (err) {
     console.error("[loginAdminAction] Error:", err);
+    if (!process.env.DATABASE_URL) {
+      return {
+        success: false,
+        error:
+          "DATABASE_URL is not set in Environment Variables (Vercel → Settings → Environment Variables).",
+      };
+    }
+    const code =
+      typeof err === "object" && err && "code" in err
+        ? String((err as { code?: unknown }).code)
+        : "";
     return {
       success: false,
-      error: "Database connection or server error during sign-in. Please verify DATABASE_URL and try again.",
+      error: code
+        ? `Database connection error (${code}). Check DATABASE_URL and firewall/pg_hba.conf access.`
+        : "Database connection error during sign-in. Verify DATABASE_URL and PostgreSQL remote access.",
     };
   }
 }
