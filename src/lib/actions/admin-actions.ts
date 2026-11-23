@@ -901,6 +901,7 @@ export async function savePageContentAction(input: {
     "/admin/about-us",
     "/admin/products-page",
     "/admin/services-page",
+    "/admin/contact-page",
   ]);
   return { success: true, block: updated };
 }
