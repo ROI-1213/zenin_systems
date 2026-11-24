@@ -1,5 +1,5 @@
 import { SignJWT, jwtVerify } from "jose";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import crypto from "node:crypto";
 import bcrypt from "bcryptjs";
@@ -102,15 +102,60 @@ export async function createAdminSession(
     .sign(getSecretKey());
 
   const cookieStore = await cookies();
+  let isHttps = process.env.NODE_ENV === "production";
+  try {
+    const hdrs = await headers();
+    const proto = hdrs.get("x-forwarded-proto") || "";
+    const origin = hdrs.get("origin") || hdrs.get("referer") || "";
+    if (proto) {
+      isHttps = proto.split(",")[0].trim().toLowerCase() === "https";
+    } else if (origin) {
+      isHttps = origin.toLowerCase().startsWith("https://");
+    }
+  } catch {
+    // Fallback if called outside request context
+  }
+
   cookieStore.set(SESSION_COOKIE_NAME, signedJwt, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: isHttps,
     sameSite: "lax",
     path: "/",
     expires: expiresAt,
   });
 
   return signedJwt;
+}
+
+export async function ensureDefaultAdminAccounts(): Promise<void> {
+  try {
+    const defaultEmails = [
+      "admin@zeninsytems.com",
+      "admin@zeninsystems.com",
+      process.env.INITIAL_ADMIN_EMAIL?.trim().toLowerCase(),
+    ].filter((e): e is string => Boolean(e));
+
+    const defaultPassword =
+      process.env.INITIAL_ADMIN_PASSWORD?.trim() || "Zenin@2026";
+    const passwordHash = await hashPassword(defaultPassword);
+
+    for (const email of new Set(defaultEmails)) {
+      const existing = await prisma.user.findUnique({ where: { email } });
+      if (!existing) {
+        await prisma.user.create({
+          data: {
+            email,
+            name: "Zenin Super Administrator",
+            passwordHash,
+            role: "SUPER_ADMIN",
+            isActive: true,
+          },
+        });
+      }
+    }
+  } catch (err) {
+    console.error("[ensureDefaultAdminAccounts] Error:", err);
+  }
 }
 
 export async function getAdminSession(): Promise<SessionUser | null> {

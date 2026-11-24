@@ -4,9 +4,14 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-function buildDatasourceUrl(): string | undefined {
-  const raw = process.env.DATABASE_URL;
-  if (!raw) return undefined;
+const DEFAULT_PROD_POSTGRES_URL =
+  "postgresql://zeni52402_zenin:%3Dm%26v%2ActF4w%3FsKkcY%24w@168.119.64.101:5432/zeni52402_zenin?schema=public";
+
+function buildDatasourceUrl(): string {
+  const raw = process.env.DATABASE_URL?.trim() || DEFAULT_PROD_POSTGRES_URL;
+  if (!process.env.DATABASE_URL) {
+    process.env.DATABASE_URL = raw;
+  }
   if (
     (raw.startsWith("postgresql://") || raw.startsWith("postgres://")) &&
     !raw.includes("connection_limit=")
@@ -22,7 +27,7 @@ const datasourceUrl = buildDatasourceUrl();
 export const prisma =
   globalForPrisma.prisma ??
   new PrismaClient({
-    ...(datasourceUrl ? { datasources: { db: { url: datasourceUrl } } } : {}),
+    datasources: { db: { url: datasourceUrl } },
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
   });
 
